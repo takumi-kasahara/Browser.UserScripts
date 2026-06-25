@@ -1,8 +1,8 @@
 {
   "scripts": {
+    "build": "npm run build:gm && npm run build:zip",
     "build:gm": "node .tools/build.gm.js",
-    "build:zip": "node .tools/build.zip.js",
-    "build": "npm run build:gm && npm run build:zip"
+    "build:zip": "node .tools/build.zip.js"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
