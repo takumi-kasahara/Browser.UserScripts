@@ -18,8 +18,9 @@
 // @exclude     https://booklog.jp/users/*/stats
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/NavigatorExtensions.js
+  // src/modules/NavigatorExtensions.ts
   async function copyToClipboard(message, item) {
     try {
       if (typeof item === "string") await navigator.clipboard.writeText(item);
@@ -32,7 +33,7 @@
     }
   }
 
-  // src/modules/WindowExtensions.js
+  // src/modules/WindowExtensions.ts
   async function open(urls) {
     if (!urls || urls.length === 0) return;
     const PAGE_SIZE = 20;
@@ -50,7 +51,7 @@
     }
   }
 
-  // src/scripts/ISBN to URL for booklog.jp.user.js
+  // src/scripts/ISBN to URL for booklog.jp.user.ts
   window.addEventListener("load", () => {
     addButton("booklog", (isbn10) => isbn10 ? `https://booklog.jp/item/1/${isbn10}` : null);
     addButton("bookmeter", (isbn10) => isbn10 ? `https://bookmeter.com/b/${isbn10}` : null);
@@ -68,7 +69,7 @@
       button.addEventListener(
         "click",
         async () => {
-          const isbn10 = extract().filter((isbn102) => isISBN10(isbn102));
+          const isbn10 = extract().filter(isISBN10);
           const isbn13 = await toISBN13(isbn10.join(","));
           const urls = isbn10.map((e, i) => from(e, isbn13.at(i) ?? "")).filter((url) => typeof url === "string");
           await open(urls);
@@ -119,8 +120,7 @@
         if (values.length > 0) return values;
         throw new Error(`ISBN not found: ${isbn10}`);
       } catch (e) {
-        if (!(e instanceof Error)) throw e;
-        console.warn(e.message);
+        console.warn(e);
         return [];
       }
     }

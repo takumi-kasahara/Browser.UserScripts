@@ -5,8 +5,9 @@
 // @match       https://www.amazon.co.jp/s?*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Redirect on Amazon.user.js
+  // src/scripts/Redirect on Amazon.user.ts
   (() => {
     const url = new URL(location.href);
     if (url.searchParams.has("k") && !url.searchParams.has("rh")) {

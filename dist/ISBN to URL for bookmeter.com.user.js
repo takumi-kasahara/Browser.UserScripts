@@ -5,8 +5,9 @@
 // @match       https://bookmeter.com/books/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/NavigatorExtensions.js
+  // src/modules/NavigatorExtensions.ts
   async function copyToClipboard(message, item) {
     try {
       if (typeof item === "string") await navigator.clipboard.writeText(item);
@@ -19,7 +20,7 @@
     }
   }
 
-  // src/modules/WindowExtensions.js
+  // src/modules/WindowExtensions.ts
   async function open(urls) {
     if (!urls || urls.length === 0) return;
     const PAGE_SIZE = 20;
@@ -37,7 +38,7 @@
     }
   }
 
-  // src/scripts/ISBN to URL for bookmeter.com.user.js
+  // src/scripts/ISBN to URL for bookmeter.com.user.ts
   window.addEventListener("load", () => {
     addButton("booklog", (isbn10) => `https://booklog.jp/item/1/${isbn10}`);
     addButton("bookmeter", (isbn10) => `https://bookmeter.com/b/${isbn10}`);

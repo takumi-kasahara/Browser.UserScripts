@@ -5,8 +5,9 @@
 // @match       https://kuji.rakuten.co.jp/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/HtmlExtensions.js
+  // src/modules/HtmlExtensions.ts
   function available(element) {
     if (!element) throw new TypeError("Element is required.");
     if (!element.isConnected) return false;
@@ -24,7 +25,7 @@
     return visible(element.parentElement);
   }
 
-  // src/scripts/Rakuten Lucky Kuji.user.js
+  // src/scripts/Rakuten Lucky Kuji.user.ts
   window.addEventListener("load", () => {
     if (location.href.match(/\/(lose|win|already)/))
       window.open("about:blank", "_self")?.close();

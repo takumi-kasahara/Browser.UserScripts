@@ -5,8 +5,9 @@
 // @match       https://member.pointmail.rakuten.co.jp/box
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Rakuten Point Mall Mail de Point Box.user.js
+  // src/scripts/Rakuten Point Mall Mail de Point Box.user.ts
   window.addEventListener("load", () => {
     const target = document.querySelector(".mailListBox");
     if (!target) throw new Error("Target not found.");

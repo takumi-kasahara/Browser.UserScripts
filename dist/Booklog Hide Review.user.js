@@ -5,8 +5,9 @@
 // @match       https://booklog.jp/item/1/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Booklog Hide Review.user.js
+  // src/scripts/Booklog Hide Review.user.ts
   window.addEventListener("load", () => {
     const es = [
       "alib",

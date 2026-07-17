@@ -12,10 +12,10 @@ window.addEventListener('load', () => {
   addButton('calil', isbn10 => `https://calil.jp/book/${isbn10}`);
 
   /**
-   * @param {string} label
-   * @param {(isbn10: string) => string} from
+   * @param label
+   * @param from
    */
-  function addButton(label, from) {
+  function addButton(label: string, from: (isbn10: string) => string): void {
     const button = document.createElement('button');
     button.appendChild(document.createTextNode(label));
     button.setAttribute('type', 'button');
@@ -38,7 +38,7 @@ window.addEventListener('load', () => {
     const target = document.querySelector('.inner__registrations');
     container.insertBefore(element, target);
   }
-  function extract() {
+  function extract(): string[] {
     const e = document.querySelector('.image__cover');
     return e instanceof HTMLAnchorElement
       ? [e.href.replace('https://bookmeter.com/books/', '').slice(0, 10)]

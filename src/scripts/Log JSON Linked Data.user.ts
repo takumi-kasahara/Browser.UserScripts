@@ -29,13 +29,13 @@ if (window.top === window.self) window.addEventListener('load', () => {
       }
 
     /**
-     * @param {Node} target
-     * @param {NodeList} addedNodes
-     * @param {...string} reason
+     * @param target
+     * @param addedNodes
+     * @param reason
      */
-    function handle(target, addedNodes, ...reason) {
+    function handle(target: Node, addedNodes: NodeList, ...reason: string[]): void {
       const children = Array.from(addedNodes)
-        .filter(e => e instanceof HTMLScriptElement)
+        .filter((e): e is HTMLScriptElement => e instanceof HTMLScriptElement)
         .filter(e => e.type === 'application/ld+json');
       const self = target instanceof HTMLScriptElement && target.type === 'application/ld+json'
         ? target
@@ -60,9 +60,9 @@ if (window.top === window.self) window.addEventListener('load', () => {
   });
 
   /**
-   * @param {Record<string, unknown>} data
+   * @param data
    */
-  function fromJson(data) {
+  function fromJson(data: Record<string, unknown>): void {
     if (Object.hasOwn(data, 'headline'))
       setTitle(String(data['headline']));
     if (Object.hasOwn(data, '@type'))
@@ -74,9 +74,9 @@ if (window.top === window.self) window.addEventListener('load', () => {
         }
   }
   /**
-   * @param {string} title
+   * @param title
    */
-  function setTitle(title) {
+  function setTitle(title: string): void {
     if (!title) return;
     const oldTitle = document.title.normalize('NFKC');
     const newTitle = title.normalize('NFKC');

@@ -6,8 +6,9 @@
 // @match       https://honto.jp/my/account/point/footmark/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/DocumentExtensions.js
+  // src/modules/DocumentExtensions.ts
   async function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -20,7 +21,7 @@
     return null;
   }
 
-  // src/scripts/Honto Footmark.user.js
+  // src/scripts/Honto Footmark.user.ts
   window.addEventListener("load", async () => {
     document.getElementById("pbBlock2656959")?.remove();
     document.getElementById("pbBlock2656998")?.remove();

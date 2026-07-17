@@ -31,21 +31,21 @@ window.addEventListener('load', () => {
   addButton('kinokuniya', (isbn10, isbn13) => isbn13 ? `https://www.kinokuniya.co.jp/f/dsg-01-${isbn13}` : null);
 
   /**
-   * @param {string} label
-   * @param {(isbn10: string, isbn13: string) => string | null} from
+   * @param label
+   * @param from
    */
-  function addButton(label, from) {
+  function addButton(label: string, from: (isbn10: string, isbn13: string) => string | null): void {
     const button = document.createElement('button');
     button.appendChild(document.createTextNode(label));
     button.setAttribute('type', 'button');
     button.addEventListener(
       'click',
       async () => {
-        const isbn10 = extract().filter(isbn10 => isISBN10(isbn10));
+        const isbn10 = extract().filter(isISBN10);
         const isbn13 = await toISBN13(isbn10.join(','));
         const urls = isbn10
           .map((e, i) => from(e, isbn13.at(i) ?? ''))
-          .filter(url => typeof url === 'string');
+          .filter((url): url is string => typeof url === 'string');
         await open(urls);
       },
     );
@@ -58,18 +58,18 @@ window.addEventListener('load', () => {
     const right = document.querySelector('.right-navigation');
     navigation.insertBefore(element, right);
   }
-  function extract() {
+  function extract(): string[] {
     if (location.pathname.startsWith('/item/1/'))
       return [location.pathname.replace('/item/1/', '')];
     if (location.pathname.startsWith('/author/') || location.pathname.startsWith('/search'))
       return Array.from(document.querySelectorAll('a.titleLink'))
-        .filter(e => e instanceof HTMLAnchorElement)
+        .filter((e): e is HTMLAnchorElement => e instanceof HTMLAnchorElement)
         .filter(a => a.origin === location.origin)
         .map(a => a.pathname.replace('/item/1/', ''))
         .reverse();
     if (location.pathname.startsWith('/users/')) {
       return Array.from(document.querySelectorAll('div.item-wrapper'))
-        .filter(e => e instanceof HTMLElement)
+        .filter((e): e is HTMLElement => e instanceof HTMLElement)
         .map(e => {
           if (e.dataset.itemId) return e.dataset.itemId;
           if (!e.dataset.book) return null;
@@ -80,15 +80,15 @@ window.addEventListener('load', () => {
             return null;
           }
         })
-        .filter(value => typeof value === 'string')
+        .filter((value): value is string => typeof value === 'string')
         .reverse();
     }
     return [];
   }
   /**
-   * @param {string} isbn10
+   * @param isbn10
    */
-  function isISBN10(isbn10) {
+  function isISBN10(isbn10: string): boolean {
     if (!/^\d{9}(?:\d|X)$/i.test(isbn10)) return false;
 
     return Array.from(
@@ -101,15 +101,14 @@ window.addEventListener('load', () => {
   }
   /**
    * @see {@link https://openbd.jp/}
-   * @param {string} isbn10
+   * @param isbn10
    */
-  async function toISBN13(isbn10) {
+  async function toISBN13(isbn10: string): Promise<string[]> {
     const element = document.querySelector('span[itemprop="isbn"]');
     if (element) return [(element.textContent ?? '').trim()].filter(Boolean);
     try {
       const response = await fetch(`https://api.openbd.jp/v1/get?isbn=${isbn10}`);
-      /** @type {{ summary: { isbn: string } }[]} */
-      const books = await response.json();
+      const books = await response.json() as { summary: { isbn: string } }[];
       for (const book of books) console.debug(book);
       const values = books
         .filter(Boolean)
@@ -118,8 +117,7 @@ window.addEventListener('load', () => {
       throw new Error(`ISBN not found: ${isbn10}`);
     }
     catch (e) {
-      if (!(e instanceof Error)) throw e;
-      console.warn(e.message);
+      console.warn(e);
       return [];
     }
   }

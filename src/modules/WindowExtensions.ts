@@ -1,5 +1,6 @@
 import { copyToClipboard } from './NavigatorExtensions.js';
-export function select() {
+
+export function select(): Selection | null {
   const selection = window.getSelection();
   if (!selection) return null;
   if (selection.rangeCount === 0) return null;
@@ -13,10 +14,11 @@ export function select() {
   selection.addRange(range);
   return selection;
 }
+
 /**
  * @param {string[]} urls
  */
-export async function open(urls) {
+export async function open(urls: string[]): Promise<void> {
   if (!urls || urls.length === 0) return;
   const PAGE_SIZE = 20;
   const digits = String(urls.length).length;
@@ -33,25 +35,28 @@ export async function open(urls) {
     }
     window.open(url, '_blank', 'noreferrer');
   }
+
   /**
    * @param {number} number
    * @param {number} divisor
    */
-  function mod(number, divisor) {
+  function mod(number: number, divisor: number): number {
     return number - Math.floor(number / divisor) * divisor;
   }
 }
+
 /**
  * @param {string} domain
  */
-export function is(domain) {
+export function is(domain: string): boolean {
   return location.hostname.split('.').slice(-domain.split('.').length).join('.') === domain;
 }
+
 /**
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status}
- * @param {URL | string | { href: string } | { src: string }} urlLike
+ * @param {URL} urlLike
  */
-export async function tryFetch(urlLike) {
+export async function tryFetch(urlLike: URL | string | { href: string } | { src: string }): Promise<{ exists: boolean; url: string }> {
   const url = from(urlLike);
   if (equiv(location, url)) return { exists: true, url: url.href };
   try {
@@ -69,10 +74,11 @@ export async function tryFetch(urlLike) {
     return { exists: false, url: url.href };
   }
 }
+
 /**
  * @param {URL} urlLike
  */
-export async function exists(urlLike) {
+export async function exists(urlLike: URL | string | { href: string } | { src: string }): Promise<boolean> {
   const url = from(urlLike);
   if (location.href === url.href) return true;
   try {
@@ -90,11 +96,15 @@ export async function exists(urlLike) {
     return false;
   }
 }
+
 /**
  * @param {URL | string | { href: string } | { src: string }} urlLike1
  * @param {URL | string | { href: string } | { src: string }} urlLike2
  */
-export function equiv(urlLike1, urlLike2) {
+export function equiv(
+  urlLike1: URL | string | { href: string } | { src: string },
+  urlLike2: URL | string | { href: string } | { src: string },
+): boolean {
   const url1 = from(urlLike1);
   const url2 = from(urlLike2);
   if (url1.origin !== url2.origin) return false;
@@ -105,10 +115,11 @@ export function equiv(urlLike1, urlLike2) {
 
   return true;
 }
+
 /**
  * @param {URL | string | { href: string } | { src: string }} urlLike
  */
-export function from(urlLike) {
+export function from(urlLike: URL | string | { href: string } | { src: string }): URL {
   if (urlLike instanceof URL)
     return urlLike;
   if (typeof urlLike === 'string')

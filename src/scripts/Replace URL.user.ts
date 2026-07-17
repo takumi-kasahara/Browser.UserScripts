@@ -6,13 +6,12 @@
 // @exclude     https://translate.google.com/*
 // @exclude     https://www.hanmoto.com/bd/search/top?*
 // @exclude     https://www.maruzenjunkudo.co.jp/search?*
+// @match       https://*/*
 // @grant       GM.notification
 // @require     https://cdn.jsdelivr.net/npm/tldts/dist/index.umd.min.js
 // @noframes
 // ==/UserScript==
-/* global GM */
-/* global tldts */
-import { from, equiv, tryFetch } from '../modules/WindowExtensions.js';
+import { equiv, from, tryFetch } from '../modules/WindowExtensions.js';
 if (window.top === window.self) window.addEventListener('load', async () => {
   new MutationObserver(async mutations => {
     for (const mutation of mutations)
@@ -26,13 +25,13 @@ if (window.top === window.self) window.addEventListener('load', async () => {
       }
 
     /**
-     * @param {Node} target
-     * @param {NodeList} addedNodes
-     * @param {...string} reason
+     * @param target
+     * @param addedNodes
+     * @param reason
      */
-    async function handle(target, addedNodes, ...reason) {
+    async function handle(target: Node, addedNodes: NodeList, ...reason: string[]): Promise<void> {
       const children = Array.from(addedNodes)
-        .filter(e => e instanceof HTMLLinkElement)
+        .filter((e): e is HTMLLinkElement => e instanceof HTMLLinkElement)
         .filter(e => e.rel === 'canonical');
       const self = target instanceof HTMLLinkElement && target.rel === 'canonical'
         ? target
@@ -58,9 +57,9 @@ if (window.top === window.self) window.addEventListener('load', async () => {
   if (canonical) assign(new URL(canonical));
 
   /**
-   * @param {URL | string | { href: string } | { src: string }} urlLike
+   * @param urlLike
    */
-  function assign(urlLike) {
+  function assign(urlLike: URL | string | { href: string } | { src: string }): void {
     const url = from(urlLike);
     if (equiv(location, url)) return;
     if (
@@ -73,7 +72,6 @@ if (window.top === window.self) window.addEventListener('load', async () => {
       console.info('New URL:', url.href);
       history.pushState(null, '', url.href);
     }
-    // @ts-ignore
     else GM.notification({
       text: `${location.href}\n${url.href}`,
       title: 'Redirecting',
@@ -82,15 +80,18 @@ if (window.top === window.self) window.addEventListener('load', async () => {
     });
 
     /**
-     * @param {URL | string | { href: string } | { src: string }} urlLike
+     * @param urlLike
      */
-    function hasLocalePrefix(urlLike) {
+    function hasLocalePrefix(urlLike: URL | string | { href: string } | { src: string }): boolean {
       const url = from(urlLike);
       const first = url.pathname.split('/').filter(Boolean).at(0) ?? '';
       return /^[a-z]{2}(?:-[a-z]{2})?$/i.test(first);
     }
   }
-  async function getCanonical() {
+  /**
+   * @returns
+   */
+  async function getCanonical(): Promise<string | null> {
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical instanceof HTMLLinkElement) {
       if (equiv(location, canonical)) return canonical.href;
@@ -107,7 +108,10 @@ if (window.top === window.self) window.addEventListener('load', async () => {
     }
     return null;
 
-    async function normalize() {
+    /**
+     * @returns
+     */
+    async function normalize(): Promise<string | null> {
       const url = new URL(await fetchShortened());
       const paths = url.pathname.split('/');
       if (
@@ -117,8 +121,10 @@ if (window.top === window.self) window.addEventListener('load', async () => {
       const result = await tryFetch(`${url.origin}${paths.join('/')}${url.search}${url.hash}`);
       return result.exists ? result.url : null;
 
-      async function fetchShortened() {
-        // @ts-ignore
+      /**
+       * @returns
+       */
+      async function fetchShortened(): Promise<string> {
         const parsed = tldts.parse(location.origin);
         if (parsed.subdomain !== 'www')
           return location.href;

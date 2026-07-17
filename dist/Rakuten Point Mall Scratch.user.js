@@ -5,8 +5,9 @@
 // @match       https://pointmall.rakuten.co.jp/scratch
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Rakuten Point Mall Scratch.user.js
+  // src/scripts/Rakuten Point Mall Scratch.user.ts
   window.addEventListener("load", async () => {
     const target = document.getElementById("main-inner");
     if (!target) throw new Error("Target not found");

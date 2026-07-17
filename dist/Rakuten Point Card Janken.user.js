@@ -5,13 +5,14 @@
 // @match       https://pointcard.rakuten.co.jp/campaign/entire/janken_challenge/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/DocumentExtensions.js
+  // src/modules/DocumentExtensions.ts
   async function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  // src/scripts/Rakuten Point Card Janken.user.js
+  // src/scripts/Rakuten Point Card Janken.user.ts
   window.addEventListener("load", async () => {
     document.getElementById("janken-score")?.remove();
     const start = document.getElementById("js-cpn-janken-start")?.querySelector(".js-start-btn");

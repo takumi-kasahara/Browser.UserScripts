@@ -1,8 +1,9 @@
 #!/usr/bin/env node
+import { build } from 'esbuild';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { build } from 'esbuild';
+
 (async () => {
   const rootDir = getRootDir();
   const srcDir = path.join(rootDir, 'src', 'scripts');
@@ -12,7 +13,8 @@ import { build } from 'esbuild';
 
   const files = fs.readdirSync(srcDir, { recursive: false, withFileTypes: true })
     .filter(x => x.isFile())
-    .map(x => path.join(x.parentPath, x.name));
+    .map(x => path.join(x.parentPath, x.name))
+    .filter(x => !/\.test\.[cm]?[jt]sx?$/.test(x));
   for (const file of files) {
     const source = fs.readFileSync(file, 'utf-8');
     const match = source.match(/\/\/ ==UserScript==[\s\S]*?\/\/ ==\/UserScript==/);
@@ -28,7 +30,8 @@ import { build } from 'esbuild';
       platform: 'browser',
       banner: { js: banner },
     });
-    if (!bundled || !bundled.outputFiles?.at(0)?.text) continue;
+    const outputFile = bundled.outputFiles?.at(0);
+    if (!outputFile?.text) continue;
     const distDir = path.join(path.dirname(file).replace(srcDir, outDir));
     if (distDir !== outDir)
       fs.mkdirSync(path.join(distDir), { recursive: true });
@@ -37,12 +40,12 @@ import { build } from 'esbuild';
     console.debug('create:', fileName);
     fs.writeFileSync(
       path.join(distDir, fileName),
-      bundled.outputFiles.at(0).text,
+      outputFile.text,
       'utf-8',
     );
   }
 
-  function getRootDir() {
+  function getRootDir(): string {
     const currentDir = path.dirname(fileURLToPath(import.meta.url));
     return path.resolve(currentDir, '..');
   }

@@ -30,16 +30,16 @@ if (window.top === window.self) window.addEventListener('load', () => {
       }
 
     /**
-     * @param {Node} target
-     * @param {NodeList} addedNodes
-     * @param {...string} reason
+     * @param target
+     * @param addedNodes
+     * @param reason
      */
-    function handle(target, addedNodes, ...reason) {
+    function handle(target: Node, addedNodes: NodeList, ...reason: string[]): void {
       if (!(target instanceof HTMLElement)) return;
       const closest = target.closest('[typeof]') ?? document.documentElement;
       const type = closest.getAttribute('typeof') ?? '';
       const children = Array.from(addedNodes)
-        .filter(e => e instanceof HTMLElement)
+        .filter((e): e is HTMLElement => e instanceof HTMLElement)
         .filter(node => node.getAttribute('property'));
       const properties = target.hasAttribute('property')
         ? [target, ...children]
@@ -72,10 +72,10 @@ if (window.top === window.self) window.addEventListener('load', () => {
   });
 
   /**
-  * @param {Record<string, unknown>} data
-   * @param {string} type
+   * @param data
+   * @param type
    */
-  function fromElement(data, type) {
+  function fromElement(data: Record<string, unknown>, type: string): void {
     switch (type) {
       default:
         if (Object.hasOwn(data, 'twitter:title'))
@@ -86,9 +86,9 @@ if (window.top === window.self) window.addEventListener('load', () => {
     }
   }
   /**
-   * @param {string} title
+   * @param title
    */
-  function setTitle(title) {
+  function setTitle(title: string): void {
     if (!title) return;
     const oldTitle = document.title.normalize('NFKC');
     const newTitle = title.normalize('NFKC');

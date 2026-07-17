@@ -5,8 +5,9 @@
 // @match       https://point.rakuten.co.jp/doc/tametokumodekuji/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/HtmlExtensions.js
+  // src/modules/HtmlExtensions.ts
   function visible(element) {
     if (!element) throw new TypeError("Element is required.");
     if (element.hidden) return false;
@@ -16,7 +17,7 @@
     return visible(element.parentElement);
   }
 
-  // src/scripts/Rakuten PointClub Kuji.user.js
+  // src/scripts/Rakuten PointClub Kuji.user.ts
   window.addEventListener("load", () => {
     if (location.search)
       window.open("about:blank", "_self")?.close();

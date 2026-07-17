@@ -22,10 +22,10 @@ window.addEventListener('load', () => {
     );
 
     /**
-     * @param {string} label
-     * @param {(isbn10: string) => string} from
+     * @param label
+     * @param from
      */
-    function addButton(label, from) {
+    function addButton(label: string, from: (isbn10: string) => string): void {
       const button = document.createElement('button');
       button.appendChild(document.createTextNode(label));
       button.setAttribute('type', 'button');
@@ -39,7 +39,7 @@ window.addEventListener('load', () => {
       );
       element.appendChild(button);
     }
-    function extract() {
+    function extract(): string[] {
       const isbn10 = document.querySelector('span[itemprop="isbn10"]')?.textContent?.trim();
       return isbn10 ? [isbn10] : [];
     }
@@ -70,10 +70,10 @@ window.addEventListener('load', () => {
     });
 
     /**
-     * @param {string} label
-     * @param {(isbn10: string) => string} from
+     * @param label
+     * @param from
      */
-    function addButton(label, from) {
+    function addButton(label: string, from: (isbn10: string) => string): void {
       const button = document.createElement('button');
       button.appendChild(document.createTextNode(label));
       button.setAttribute('type', 'button');
@@ -81,35 +81,27 @@ window.addEventListener('load', () => {
       button.addEventListener(
         'click',
         async () => {
-          const urls = extract()
-            .filter(Boolean)
-            .map(isbn10 => from(isbn10));
+          const urls = extract().map(isbn10 => from(isbn10));
           await open(urls);
         },
       );
       element.appendChild(button);
     }
-    function extract() {
-      return Array.from(document.querySelectorAll('a.bd-img-image'))
-        .filter(e => e instanceof HTMLAnchorElement)
-        .filter(a => a.origin === location.origin)
-        .map(a => a.pathname.replace('/bd/isbn/', ''))
-        .map(isbn13 => toISBN10(isbn13))
-        .reverse();
+    function extract(): string[] {
+      const isbn13 = document.querySelector('span[itemprop="isbn13"]')?.textContent?.trim();
+      if (!isbn13) return [];
+      const isbn10 = toISBN10(isbn13);
+      return isbn10 ? [isbn10] : [];
     }
     /**
-     * @param {string} isbn13
+     * @param isbn13
      */
-    function toISBN10(isbn13) {
-      if (!/^\d{13}$/.test(isbn13)) throw new TypeError('Invalid ISBN13 format.');
-
-      const core = isbn13.slice(3, -1);
-      const checkDigit = (11 - (
-        Array.from(core, (d, i) => Number.parseInt(d, 10) * (10 - i))
-          .reduce((s, v) => s + v, 0) % 11
-      )) % 11;
-
-      return `${core}${checkDigit === 10 ? 'X' : checkDigit}`;
+    function toISBN10(isbn13: string): string | null {
+      if (!/^\d{13}$/.test(isbn13)) return null;
+      const sum = Array.from(isbn13.slice(0, 12), (d, i) => Number.parseInt(d, 10) * (i % 2 === 0 ? 1 : 3))
+        .reduce((s, v) => s + v, 0);
+      const check = (10 - (sum % 10)) % 10;
+      return `${isbn13.slice(0, 9)}${check}`;
     }
   }
 });

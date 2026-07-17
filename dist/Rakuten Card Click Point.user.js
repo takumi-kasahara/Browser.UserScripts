@@ -5,8 +5,9 @@
 // @match       https://www.rakuten-card.co.jp/e-navi/members/point/click-point/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Rakuten Card Click Point.user.js
+  // src/scripts/Rakuten Card Click Point.user.ts
   window.addEventListener("load", () => {
     const target = document.getElementById("js-click-point-banner-list");
     if (!target) throw new Error("Target not found.");

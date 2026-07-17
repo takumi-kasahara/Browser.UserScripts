@@ -5,8 +5,9 @@
 // @match       https://pointmall.rakuten.co.jp/omikuji
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/HtmlExtensions.js
+  // src/modules/HtmlExtensions.ts
   function available(element) {
     if (!element) throw new TypeError("Element is required.");
     if (!element.isConnected) return false;
@@ -16,7 +17,7 @@
     return available(element.parentElement);
   }
 
-  // src/scripts/Rakuten Point Mall Omikuji.user.js
+  // src/scripts/Rakuten Point Mall Omikuji.user.ts
   window.addEventListener("load", () => {
     const target = document.getElementsByClassName("omikuji_result_wrapper")[0] ?? document.getElementById("main-inner");
     new MutationObserver((mutations, observer) => {

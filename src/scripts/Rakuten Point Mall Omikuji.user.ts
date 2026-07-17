@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
     for (const mutation of mutations)
       if (mutation.target instanceof HTMLElement) {
         const es = Array.from(mutation.target.querySelectorAll('.result_present > .present_btn > a[role="button"]'))
-          .filter(e => e instanceof HTMLElement)
+          .filter((e): e is HTMLElement => e instanceof HTMLElement)
           .filter(e => available(e));
         if (es.length === 0) continue;
         for (const e of es) e.click();
@@ -29,7 +29,7 @@ window.addEventListener('load', () => {
   });
 
   const es = Array.from(document.querySelectorAll('.omikuji_start > .btn_area > a'))
-    .filter(e => e instanceof HTMLElement)
+    .filter((e): e is HTMLElement => e instanceof HTMLElement)
     .filter(e => available(e));
   if (es.length > 0) for (const e of es) e.click();
 });

@@ -5,8 +5,9 @@
 // @match       https://www.rakuten-card.co.jp/e-navi/members/point/shop-point/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Rakuten Card Point Plus.user.js
+  // src/scripts/Rakuten Card Point Plus.user.ts
   window.addEventListener("load", () => {
     const target = document.querySelector(".xlo-tab-contents");
     if (!target) throw new Error("Target not found.");

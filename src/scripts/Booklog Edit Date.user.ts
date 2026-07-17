@@ -15,18 +15,18 @@ window.addEventListener('load', () => {
   setChecked(document.getElementById('read_at_null'), true);
 
   /**
-    * @param {HTMLElement | null} element
-    * @param {string | null} value
+   * @param element
+   * @param value
    */
-  function setValue(element, value) {
+  function setValue(element: HTMLElement | null, value: string | null): void {
     if (element instanceof HTMLInputElement)
       element.value = value ?? '';
   }
   /**
-    * @param {HTMLElement | null} element
-   * @param {boolean} checked
+   * @param element
+   * @param checked
    */
-  function setChecked(element, checked) {
+  function setChecked(element: HTMLElement | null, checked: boolean): void {
     if (element instanceof HTMLInputElement)
       element.checked = checked;
   }

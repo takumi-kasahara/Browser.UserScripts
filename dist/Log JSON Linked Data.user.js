@@ -5,8 +5,9 @@
 // @grant       none
 // @noframes
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/JsonExtensions.js
+  // src/modules/JsonExtensions.ts
   function tryParse(text) {
     const cleaned = text.replaceAll("\n", "").replaceAll(/\/\*\s*<!\[CDATA\[\s*\*\//g, "").replaceAll(/\/\*\s*\]\]>\s*\*\//g, "").trim();
     try {
@@ -21,16 +22,13 @@
     return Array.from(new Set(visit(data)));
     function visit(data2) {
       if (data2 === null || typeof data2 !== "object") return [];
-      if (Array.isArray(data2)) return data2.flatMap(visit);
-      const children = Object.values(data2).flatMap((value) => visit(
-        /** @type {Record<string, unknown> | Record<string, unknown>[] | null} */
-        value
-      ));
+      if (Array.isArray(data2)) return data2.flatMap((item) => visit(item));
+      const children = Object.values(data2).flatMap((value) => visit(value));
       return [data2, ...children];
     }
   }
 
-  // src/scripts/Log JSON Linked Data.user.js
+  // src/scripts/Log JSON Linked Data.user.ts
   if (window.top === window.self) window.addEventListener("load", () => {
     const ldObjects = Array.from(document.querySelectorAll('script[type="application/ld+json"]')).flatMap((e) => extractObjects(tryParse(e.textContent?.trim() ?? "")));
     for (const data of ldObjects) {

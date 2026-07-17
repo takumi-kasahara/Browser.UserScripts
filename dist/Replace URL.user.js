@@ -6,12 +6,14 @@
 // @exclude     https://translate.google.com/*
 // @exclude     https://www.hanmoto.com/bd/search/top?*
 // @exclude     https://www.maruzenjunkudo.co.jp/search?*
+// @match       https://*/*
 // @grant       GM.notification
 // @require     https://cdn.jsdelivr.net/npm/tldts/dist/index.umd.min.js
 // @noframes
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/WindowExtensions.js
+  // src/modules/WindowExtensions.ts
   async function tryFetch(urlLike) {
     const url = from(urlLike);
     if (equiv(location, url)) return { exists: true, url: url.href };
@@ -51,7 +53,7 @@
     throw new TypeError("Invalid URL-like object.");
   }
 
-  // src/scripts/Replace URL.user.js
+  // src/scripts/Replace URL.user.ts
   if (window.top === window.self) window.addEventListener("load", async () => {
     new MutationObserver(async (mutations) => {
       for (const mutation of mutations)

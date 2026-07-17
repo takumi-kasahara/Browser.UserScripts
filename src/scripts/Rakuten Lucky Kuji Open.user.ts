@@ -7,7 +7,7 @@
 // ==/UserScript==
 window.addEventListener('load', async () => {
   const urls = Array.from(document.querySelectorAll('table[class="table"]'))
-    .flatMap(e => Array.from(e.getElementsByTagName('a'), a => a.href));
+    .flatMap(e => Array.from(e.getElementsByTagName('a'), (a): string => a.href));
   for (const url of urls) {
     await new Promise(resolve => setTimeout(resolve, 5000));
     window.open(url, '_blank', 'noreferrer');

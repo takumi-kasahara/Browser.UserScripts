@@ -5,8 +5,9 @@
 // @match       https://booklog.jp/edit/1/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Booklog Edit Date.user.js
+  // src/scripts/Booklog Edit Date.user.ts
   window.addEventListener("load", () => {
     setValue(document.getElementById("create_on_y"), null);
     setValue(document.getElementById("create_on_m"), null);

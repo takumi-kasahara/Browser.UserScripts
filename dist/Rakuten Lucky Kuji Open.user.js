@@ -5,8 +5,9 @@
 // @match       https://rakucoin.appspot.com/rakuten/kuji/
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Rakuten Lucky Kuji Open.user.js
+  // src/scripts/Rakuten Lucky Kuji Open.user.ts
   window.addEventListener("load", async () => {
     const urls = Array.from(document.querySelectorAll('table[class="table"]')).flatMap((e) => Array.from(e.getElementsByTagName("a"), (a) => a.href));
     for (const url of urls) {

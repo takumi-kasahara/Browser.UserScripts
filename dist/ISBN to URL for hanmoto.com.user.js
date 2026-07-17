@@ -6,8 +6,9 @@
 // @match       https://www.hanmoto.com/bd/search/*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/NavigatorExtensions.js
+  // src/modules/NavigatorExtensions.ts
   async function copyToClipboard(message, item) {
     try {
       if (typeof item === "string") await navigator.clipboard.writeText(item);
@@ -20,7 +21,7 @@
     }
   }
 
-  // src/modules/WindowExtensions.js
+  // src/modules/WindowExtensions.ts
   async function open(urls) {
     if (!urls || urls.length === 0) return;
     const PAGE_SIZE = 20;
@@ -38,10 +39,10 @@
     }
   }
 
-  // src/scripts/ISBN to URL for hanmoto.com.user.js
+  // src/scripts/ISBN to URL for hanmoto.com.user.ts
   window.addEventListener("load", () => {
     if (location.pathname.startsWith("/bd/isbn/")) {
-      let addButton = function(label, from) {
+      let addButton2 = function(label, from) {
         const button = document.createElement("button");
         button.appendChild(document.createTextNode(label));
         button.setAttribute("type", "button");
@@ -49,26 +50,27 @@
         button.addEventListener(
           "click",
           async () => {
-            const urls = extract().map((isbn10) => from(isbn10));
+            const urls = extract2().map((isbn10) => from(isbn10));
             await open(urls);
           }
         );
         element.appendChild(button);
-      }, extract = function() {
+      }, extract2 = function() {
         const isbn10 = document.querySelector('span[itemprop="isbn10"]')?.textContent?.trim();
         return isbn10 ? [isbn10] : [];
       };
+      var addButton = addButton2, extract = extract2;
       const element = document.createElement("section");
       element.classList.add("sidebar", "book-col-mb-1");
-      addButton("booklog", (isbn10) => `https://booklog.jp/item/1/${isbn10}`);
-      addButton("bookmeter", (isbn10) => `https://bookmeter.com/b/${isbn10}`);
-      addButton("calil", (isbn10) => `https://calil.jp/book/${isbn10}`);
+      addButton2("booklog", (isbn10) => `https://booklog.jp/item/1/${isbn10}`);
+      addButton2("bookmeter", (isbn10) => `https://bookmeter.com/b/${isbn10}`);
+      addButton2("calil", (isbn10) => `https://calil.jp/book/${isbn10}`);
       document.querySelector(".book-col-frame")?.insertBefore(
         element,
         document.querySelector(".book-cart")
       );
     } else if (location.pathname.startsWith("/bd/search/")) {
-      let addButton = function(label, from) {
+      let addButton2 = function(label, from) {
         const button = document.createElement("button");
         button.appendChild(document.createTextNode(label));
         button.setAttribute("type", "button");
@@ -76,23 +78,27 @@
         button.addEventListener(
           "click",
           async () => {
-            const urls = extract().filter(Boolean).map((isbn10) => from(isbn10));
+            const urls = extract2().map((isbn10) => from(isbn10));
             await open(urls);
           }
         );
         element.appendChild(button);
-      }, extract = function() {
-        return Array.from(document.querySelectorAll("a.bd-img-image")).filter((e) => e instanceof HTMLAnchorElement).filter((a) => a.origin === location.origin).map((a) => a.pathname.replace("/bd/isbn/", "")).map((isbn13) => toISBN10(isbn13)).reverse();
-      }, toISBN10 = function(isbn13) {
-        if (!/^\d{13}$/.test(isbn13)) throw new TypeError("Invalid ISBN13 format.");
-        const core = isbn13.slice(3, -1);
-        const checkDigit = (11 - Array.from(core, (d, i) => Number.parseInt(d, 10) * (10 - i)).reduce((s, v) => s + v, 0) % 11) % 11;
-        return `${core}${checkDigit === 10 ? "X" : checkDigit}`;
+      }, extract2 = function() {
+        const isbn13 = document.querySelector('span[itemprop="isbn13"]')?.textContent?.trim();
+        if (!isbn13) return [];
+        const isbn10 = toISBN102(isbn13);
+        return isbn10 ? [isbn10] : [];
+      }, toISBN102 = function(isbn13) {
+        if (!/^\d{13}$/.test(isbn13)) return null;
+        const sum = Array.from(isbn13.slice(0, 12), (d, i) => Number.parseInt(d, 10) * (i % 2 === 0 ? 1 : 3)).reduce((s, v) => s + v, 0);
+        const check = (10 - sum % 10) % 10;
+        return `${isbn13.slice(0, 9)}${check}`;
       };
+      var addButton = addButton2, extract = extract2, toISBN10 = toISBN102;
       const element = document.createElement("div");
-      addButton("booklog.jp", (isbn10) => `https://booklog.jp/item/1/${isbn10}`);
-      addButton("bookmeter", (isbn10) => `https://bookmeter.com/b/${isbn10}`);
-      addButton("calil.jp", (isbn10) => `https://calil.jp/book/${isbn10}`);
+      addButton2("booklog.jp", (isbn10) => `https://booklog.jp/item/1/${isbn10}`);
+      addButton2("bookmeter", (isbn10) => `https://bookmeter.com/b/${isbn10}`);
+      addButton2("calil.jp", (isbn10) => `https://calil.jp/book/${isbn10}`);
       new MutationObserver((mutations, observer) => {
         for (const mutation of mutations)
           for (const node of mutation.addedNodes)

@@ -5,8 +5,9 @@
 // @grant       none
 // @noframes
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/modules/HtmlExtensions.js
+  // src/modules/HtmlExtensions.ts
   function extractElement(element, scopeAttribute, propertyAttribute, ...properties) {
     const grouped = Object.groupBy(
       Array.from(element.querySelectorAll(`[${propertyAttribute}]`)).filter((e) => e instanceof HTMLElement).filter((e) => properties.length === 0 || properties.includes(e)).filter((e) => e.parentElement?.closest(`[${scopeAttribute}]`) === element || e.closest(`[${scopeAttribute}]`) === null),
@@ -45,7 +46,7 @@
     }
   }
 
-  // src/scripts/Log RDFa Lite.user.js
+  // src/scripts/Log RDFa Lite.user.ts
   if (window.top === window.self) window.addEventListener("load", () => {
     for (const element of [document.documentElement, ...document.querySelectorAll("[typeof]")]) {
       const data = extractElement(element, "typeof", "property");

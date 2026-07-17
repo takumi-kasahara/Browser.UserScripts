@@ -5,8 +5,9 @@
 // @match       https://pointmall.rakuten.co.jp/janken
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Rakuten Point Mall Janken.user.js
+  // src/scripts/Rakuten Point Mall Janken.user.ts
   window.addEventListener("load", () => {
     const target = document.getElementById("main-inner");
     if (!target) throw new Error("Target not found.");

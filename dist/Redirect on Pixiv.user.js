@@ -5,8 +5,9 @@
 // @match       https://www.pixiv.net/jump.php?*
 // @grant       none
 // ==/UserScript==
+"use strict";
 (() => {
-  // src/scripts/Redirect on Pixiv.user.js
+  // src/scripts/Redirect on Pixiv.user.ts
   (() => {
     const params = new URL(location.href).searchParams;
     if (params.has("url")) {
