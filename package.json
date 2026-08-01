@@ -11,16 +11,16 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@types/node": "^26.1.1",
-    "@types/web": "^0.0.352",
+    "@types/node": "^26.1.2",
+    "@types/web": "^0.0.354",
     "@vitest/coverage-v8": "^4.1.10",
     "adm-zip": "^0.6.0",
     "esbuild": "^0.28.1",
-    "eslint": "^10.7.0",
-    "globals": "^17.7.0",
-    "jsdom": "^29.1.1",
+    "eslint": "^10.8.0",
+    "globals": "^17.8.0",
+    "jsdom": "^30.0.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.64.0",
+    "typescript-eslint": "^8.65.0",
     "vitest": "^4.1.10"
   }
 }
