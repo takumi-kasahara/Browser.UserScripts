@@ -6,6 +6,7 @@
 // @exclude     https://translate.google.com/*
 // @exclude     https://www.hanmoto.com/bd/search/top?*
 // @exclude     https://www.maruzenjunkudo.co.jp/search?*
+// @exclude     https://x.com/*/media
 // @match       https://*/*
 // @grant       GM.notification
 // @require     https://cdn.jsdelivr.net/npm/tldts/dist/index.umd.min.js
