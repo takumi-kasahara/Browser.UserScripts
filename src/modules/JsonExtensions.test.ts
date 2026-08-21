@@ -17,21 +17,23 @@ describe('tryParse', () => {
   });
 
   it('returns null and warns on invalid JSON', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => { });
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     expect(tryParse('not json')).toBeNull();
     expect(warn).toHaveBeenCalled();
     warn.mockRestore();
   });
 
   it('returns null for empty string', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => { });
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     expect(tryParse('')).toBeNull();
     warn.mockRestore();
   });
 
   it('rethrows non-Error values thrown by JSON.parse', () => {
     const original = JSON.parse;
-    JSON.parse = (() => { throw 'boom'; }) as typeof JSON.parse;
+    JSON.parse = (() => {
+      throw 'boom';
+    }) as typeof JSON.parse;
     expect(() => tryParse('{}')).toThrow('boom');
     JSON.parse = original;
   });
@@ -61,7 +63,9 @@ describe('extractObjects', () => {
   it('flattens arrays recursively', () => {
     const a = { a: 1 };
     const b = { b: 2 };
-    expect(extractObjects([a, [b]] as unknown as Record<string, unknown>[])).toEqual([a, b]);
+    expect(
+      extractObjects([a, [b]] as unknown as Record<string, unknown>[]),
+    ).toEqual([a, b]);
   });
 
   it('deduplicates identical references', () => {

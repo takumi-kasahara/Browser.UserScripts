@@ -1,5 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createAnchorElement, sleep, waitForElement } from './DocumentExtensions.js';
+import {
+  createAnchorElement,
+  sleep,
+  waitForElement,
+} from './DocumentExtensions.js';
 
 describe('createAnchorElement', () => {
   it('renders an anchor with href, rel, and target', () => {

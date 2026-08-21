@@ -14,8 +14,7 @@ import AdmZip from 'adm-zip';
     console.error(`${outDir} not found.`);
     return;
   }
-  if (!fs.existsSync(binDir))
-    fs.mkdirSync(binDir, { recursive: true });
+  if (!fs.existsSync(binDir)) fs.mkdirSync(binDir, { recursive: true });
 
   const fileNames = collectUserScripts(outDir);
   if (fileNames.length === 0) {
@@ -39,7 +38,8 @@ import AdmZip from 'adm-zip';
    * @param {string} outDir
    */
   function collectUserScripts(outDir: string): string[] {
-    return fs.readdirSync(outDir, { withFileTypes: true })
+    return fs
+      .readdirSync(outDir, { withFileTypes: true })
       .filter((d: fs.Dirent) => d.isFile() && d.name.endsWith('.user.js'))
       .map((d: fs.Dirent) => d.name);
   }
@@ -67,8 +67,7 @@ import AdmZip from 'adm-zip';
       zip.deleteFile(entryName);
       console.debug('replace:', entryName);
     }
-    else
-      throw new Error(`entry not found:\t${entryName}`);
+    else throw new Error(`entry not found:\t${entryName}`);
     const zipPath = entryName.split('/').slice(0, -1).join('/');
     zip.addLocalFile(localPath, zipPath, path.basename(entryName));
   }
@@ -77,8 +76,7 @@ import AdmZip from 'adm-zip';
    * @param {string} zipPath
    */
   function writeZip(zip: AdmZip, zipPath: string): void {
-    for (const entry of zip.getEntries())
-      entry.header.time = null;
+    for (const entry of zip.getEntries()) entry.header.time = null;
 
     zip.writeZip(zipPath);
     console.debug('done:', zipPath);

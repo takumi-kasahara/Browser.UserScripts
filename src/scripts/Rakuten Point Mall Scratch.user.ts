@@ -20,7 +20,8 @@ window.addEventListener('load', async () => {
     subtree: true,
     childList: true,
   });
-  const e = document.querySelector('.start_btn')
-    ?? document.querySelector('.glitter:not(.no-play)');
+  const e
+    = document.querySelector('.start_btn')
+      ?? document.querySelector('.glitter:not(.no-play)');
   if (e instanceof HTMLElement) e.click();
 });

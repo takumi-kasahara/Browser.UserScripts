@@ -22,13 +22,10 @@ window.addEventListener('load', () => {
     button.style.position = 'relative';
     button.style.top = '50%';
     button.style.transform = 'translateY(-50%)';
-    button.addEventListener(
-      'click',
-      async () => {
-        const urls = extract().map(isbn10 => from(isbn10));
-        await open(urls);
-      },
-    );
+    button.addEventListener('click', async () => {
+      const urls = extract().map(isbn10 => from(isbn10));
+      await open(urls);
+    });
     const element = document.createElement('div');
     element.style.float = 'left';
     element.style.height = '36px';

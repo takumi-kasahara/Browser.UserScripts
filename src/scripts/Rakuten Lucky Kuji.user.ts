@@ -25,8 +25,6 @@ window.addEventListener('load', () => {
       }
   }).observe(target, {
     attributes: true,
-    attributeFilter: [
-      'style',
-    ],
+    attributeFilter: ['style'],
   });
 });

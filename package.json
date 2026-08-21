@@ -4,6 +4,7 @@
     "build": "npm run build:gm && npm run build:zip",
     "build:gm": "node --experimental-strip-types .tools/build.gm.ts",
     "build:zip": "node --experimental-strip-types .tools/build.zip.ts",
+    "lint": "prettier --write . && eslint --fix .",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
@@ -19,6 +20,7 @@
     "eslint": "^10.8.0",
     "globals": "^17.8.0",
     "jsdom": "^30.0.1",
+    "prettier": "^3.9.6",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.65.0",
     "vitest": "^4.1.10"

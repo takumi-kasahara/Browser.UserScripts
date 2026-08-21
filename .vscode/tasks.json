@@ -7,7 +7,7 @@
     "echo": true,
     "focus": true,
     "reveal": "silent",
-    "revealProblems": "onProblem",
+    "revealProblems": "onProblem"
   },
-  "tasks": [],
+  "tasks": []
 }

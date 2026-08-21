@@ -8,16 +8,20 @@ import { fileURLToPath } from 'node:url';
   const rootDir = getRootDir();
   const srcDir = path.join(rootDir, 'src', 'scripts');
   const outDir = path.join(rootDir, 'dist');
-  if (fs.existsSync(outDir)) fs.rmSync(outDir, { recursive: true, force: true });
+  if (fs.existsSync(outDir))
+    fs.rmSync(outDir, { recursive: true, force: true });
   fs.mkdirSync(outDir, { recursive: true });
 
-  const files = fs.readdirSync(srcDir, { recursive: false, withFileTypes: true })
+  const files = fs
+    .readdirSync(srcDir, { recursive: false, withFileTypes: true })
     .filter(x => x.isFile())
     .map(x => path.join(x.parentPath, x.name))
     .filter(x => !/\.test\.[cm]?[jt]sx?$/.test(x));
   for (const file of files) {
     const source = fs.readFileSync(file, 'utf-8');
-    const match = source.match(/\/\/ ==UserScript==[\s\S]*?\/\/ ==\/UserScript==/);
+    const match = source.match(
+      /\/\/ ==UserScript==[\s\S]*?\/\/ ==\/UserScript==/,
+    );
     const banner = match ? match[0] : '';
     const bundled = await build({
       entryPoints: [file],
@@ -38,11 +42,7 @@ import { fileURLToPath } from 'node:url';
 
     const fileName = `${path.basename(file, path.extname(file))}.js`;
     console.debug('create:', fileName);
-    fs.writeFileSync(
-      path.join(distDir, fileName),
-      outputFile.text,
-      'utf-8',
-    );
+    fs.writeFileSync(path.join(distDir, fileName), outputFile.text, 'utf-8');
   }
 
   function getRootDir(): string {

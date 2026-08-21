@@ -7,7 +7,8 @@ export function select(): Selection | null {
 
   const range = selection.getRangeAt(0);
   const ancestor = range.commonAncestorContainer;
-  const node = ancestor instanceof HTMLElement ? ancestor : ancestor.parentElement;
+  const node
+    = ancestor instanceof HTMLElement ? ancestor : ancestor.parentElement;
   if (!node) return selection;
   range.selectNodeContents(node);
   selection.removeAllRanges();
@@ -28,9 +29,14 @@ export async function open(urls: string[]): Promise<void> {
       urls.length > 1
       && remaining > 0
       && mod(index, PAGE_SIZE) === 0
-      && !window.confirm(`Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, '0')} / ${urls.length})`)
+      && !window.confirm(
+        `Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, '0')} / ${urls.length})`,
+      )
     ) {
-      await copyToClipboard(`Copy ${urls.length - index} URL(s):`, urls.slice(index).join('\n'));
+      await copyToClipboard(
+        `Copy ${urls.length - index} URL(s):`,
+        urls.slice(index).join('\n'),
+      );
       return;
     }
     window.open(url, '_blank', 'noreferrer');
@@ -49,14 +55,19 @@ export async function open(urls: string[]): Promise<void> {
  * @param {string} domain
  */
 export function is(domain: string): boolean {
-  return location.hostname.split('.').slice(-domain.split('.').length).join('.') === domain;
+  return (
+    location.hostname.split('.').slice(-domain.split('.').length).join('.')
+    === domain
+  );
 }
 
 /**
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status}
  * @param {URL} urlLike
  */
-export async function tryFetch(urlLike: URL | string | { href: string } | { src: string }): Promise<{ exists: boolean; url: string }> {
+export async function tryFetch(
+  urlLike: URL | string | { href: string } | { src: string },
+): Promise<{ exists: boolean; url: string }> {
   const url = from(urlLike);
   if (equiv(location, url)) return { exists: true, url: url.href };
   try {
@@ -78,7 +89,9 @@ export async function tryFetch(urlLike: URL | string | { href: string } | { src:
 /**
  * @param {URL} urlLike
  */
-export async function exists(urlLike: URL | string | { href: string } | { src: string }): Promise<boolean> {
+export async function exists(
+  urlLike: URL | string | { href: string } | { src: string },
+): Promise<boolean> {
   const url = from(urlLike);
   if (location.href === url.href) return true;
   try {
@@ -108,7 +121,11 @@ export function equiv(
   const url1 = from(urlLike1);
   const url2 = from(urlLike2);
   if (url1.origin !== url2.origin) return false;
-  if (url1.pathname.replaceAll(/\/\/+/g, '/').replace(/\/$/, '') !== url2.pathname.replaceAll(/\/\/+/g, '/').replace(/\/$/, '')) return false;
+  if (
+    url1.pathname.replaceAll(/\/\/+/g, '/').replace(/\/$/, '')
+    !== url2.pathname.replaceAll(/\/\/+/g, '/').replace(/\/$/, '')
+  )
+    return false;
   if (url1.searchParams.size !== url2.searchParams.size) return false;
   for (const [key, value] of url1.searchParams)
     if (url2.searchParams.get(key) !== value) return false;
@@ -119,14 +136,12 @@ export function equiv(
 /**
  * @param {URL | string | { href: string } | { src: string }} urlLike
  */
-export function from(urlLike: URL | string | { href: string } | { src: string }): URL {
-  if (urlLike instanceof URL)
-    return urlLike;
-  if (typeof urlLike === 'string')
-    return new URL(urlLike);
-  if ('href' in urlLike)
-    return new URL(urlLike.href);
-  if ('src' in urlLike)
-    return new URL(urlLike.src);
+export function from(
+  urlLike: URL | string | { href: string } | { src: string },
+): URL {
+  if (urlLike instanceof URL) return urlLike;
+  if (typeof urlLike === 'string') return new URL(urlLike);
+  if ('href' in urlLike) return new URL(urlLike.href);
+  if ('src' in urlLike) return new URL(urlLike.src);
   throw new TypeError('Invalid URL-like object.');
 }

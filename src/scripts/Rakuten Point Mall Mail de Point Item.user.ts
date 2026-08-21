@@ -6,7 +6,9 @@
 // @grant       none
 // ==/UserScript==
 window.addEventListener('load', () => {
-  const e = document.querySelector('.point_url > a[href^="https://pmrd.rakuten.co.jp/?r="]')
-    ?? document.querySelector('a[href^="https://pmrd.rakuten.co.jp/?r="]');
+  const e
+    = document.querySelector(
+      '.point_url > a[href^="https://pmrd.rakuten.co.jp/?r="]',
+    ) ?? document.querySelector('a[href^="https://pmrd.rakuten.co.jp/?r="]');
   if (e instanceof HTMLElement) e.click();
 });

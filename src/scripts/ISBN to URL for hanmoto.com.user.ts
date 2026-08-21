@@ -16,10 +16,9 @@ window.addEventListener('load', () => {
     addButton('bookmeter', isbn10 => `https://bookmeter.com/b/${isbn10}`);
     addButton('calil', isbn10 => `https://calil.jp/book/${isbn10}`);
 
-    document.querySelector('.book-col-frame')?.insertBefore(
-      element,
-      document.querySelector('.book-cart'),
-    );
+    document
+      .querySelector('.book-col-frame')
+      ?.insertBefore(element, document.querySelector('.book-cart'));
 
     /**
      * @param label
@@ -30,17 +29,16 @@ window.addEventListener('load', () => {
       button.appendChild(document.createTextNode(label));
       button.setAttribute('type', 'button');
       button.classList.add('btn', 'btn-sm', 'btn-default');
-      button.addEventListener(
-        'click',
-        async () => {
-          const urls = extract().map(isbn10 => from(isbn10));
-          await open(urls);
-        },
-      );
+      button.addEventListener('click', async () => {
+        const urls = extract().map(isbn10 => from(isbn10));
+        await open(urls);
+      });
       element.appendChild(button);
     }
     function extract(): string[] {
-      const isbn10 = document.querySelector('span[itemprop="isbn10"]')?.textContent?.trim();
+      const isbn10 = document
+        .querySelector('span[itemprop="isbn10"]')
+        ?.textContent?.trim();
       return isbn10 ? [isbn10] : [];
     }
   }
@@ -78,17 +76,16 @@ window.addEventListener('load', () => {
       button.appendChild(document.createTextNode(label));
       button.setAttribute('type', 'button');
       button.classList.add('btn', 'btn-sm');
-      button.addEventListener(
-        'click',
-        async () => {
-          const urls = extract().map(isbn10 => from(isbn10));
-          await open(urls);
-        },
-      );
+      button.addEventListener('click', async () => {
+        const urls = extract().map(isbn10 => from(isbn10));
+        await open(urls);
+      });
       element.appendChild(button);
     }
     function extract(): string[] {
-      const isbn13 = document.querySelector('span[itemprop="isbn13"]')?.textContent?.trim();
+      const isbn13 = document
+        .querySelector('span[itemprop="isbn13"]')
+        ?.textContent?.trim();
       if (!isbn13) return [];
       const isbn10 = toISBN10(isbn13);
       return isbn10 ? [isbn10] : [];
@@ -98,8 +95,10 @@ window.addEventListener('load', () => {
      */
     function toISBN10(isbn13: string): string | null {
       if (!/^\d{13}$/.test(isbn13)) return null;
-      const sum = Array.from(isbn13.slice(0, 12), (d, i) => Number.parseInt(d, 10) * (i % 2 === 0 ? 1 : 3))
-        .reduce((s, v) => s + v, 0);
+      const sum = Array.from(
+        isbn13.slice(0, 12),
+        (d, i) => Number.parseInt(d, 10) * (i % 2 === 0 ? 1 : 3),
+      ).reduce((s, v) => s + v, 0);
       const check = (10 - (sum % 10)) % 10;
       return `${isbn13.slice(0, 9)}${check}`;
     }

@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { available, escape, extractElement, visible } from './HtmlExtensions.js';
+import {
+  available,
+  escape,
+  extractElement,
+  visible,
+} from './HtmlExtensions.js';
 
 describe('escape', () => {
   it('escapes &, <, >', () => {

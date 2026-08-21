@@ -20,17 +20,13 @@ window.addEventListener('load', () => {
     const button = document.createElement('button');
     button.appendChild(document.createTextNode(label));
     button.setAttribute('type', 'button');
-    button.addEventListener(
-      'click',
-      async () => {
-        const urls = extract().map(isbn10 => from(isbn10));
-        await open(urls);
-      },
-    );
-    document.querySelector('.container')?.insertBefore(
-      button,
-      document.querySelector('.right'),
-    );
+    button.addEventListener('click', async () => {
+      const urls = extract().map(isbn10 => from(isbn10));
+      await open(urls);
+    });
+    document
+      .querySelector('.container')
+      ?.insertBefore(button, document.querySelector('.right'));
   }
   function extract(): string[] {
     if (location.pathname.startsWith('/list/'))

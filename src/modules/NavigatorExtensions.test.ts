@@ -7,12 +7,12 @@ describe('copyToClipboard', () => {
   });
 
   it('writes text and alerts on success (string item)', async () => {
-    const writeText = vi.fn(async () => { });
+    const writeText = vi.fn(async () => {});
     Object.defineProperty(navigator, 'clipboard', {
       configurable: true,
-      value: { writeText, write: vi.fn(async () => { }) },
+      value: { writeText, write: vi.fn(async () => {}) },
     });
-    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => { });
+    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
 
     await copyToClipboard('Done:', 'hello');
 
@@ -22,12 +22,12 @@ describe('copyToClipboard', () => {
   });
 
   it('writes a ClipboardItem and alerts on success', async () => {
-    const write = vi.fn(async () => { });
+    const write = vi.fn(async () => {});
     Object.defineProperty(navigator, 'clipboard', {
       configurable: true,
-      value: { writeText: vi.fn(async () => { }), write },
+      value: { writeText: vi.fn(async () => {}), write },
     });
-    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => { });
+    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
 
     const item = new ClipboardItem({ 'text/plain': new Blob(['x']) });
     await copyToClipboard('Done:', item);
@@ -41,11 +41,15 @@ describe('copyToClipboard', () => {
     Object.defineProperty(navigator, 'clipboard', {
       configurable: true,
       value: {
-        writeText: vi.fn(async () => { throw new Error('denied'); }),
-        write: vi.fn(async () => { throw new Error('denied'); }),
+        writeText: vi.fn(async () => {
+          throw new Error('denied');
+        }),
+        write: vi.fn(async () => {
+          throw new Error('denied');
+        }),
       },
     });
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => { });
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const promptSpy = vi.spyOn(window, 'prompt').mockImplementation(() => null);
 
     await copyToClipboard('Copy:', 'text');
@@ -59,12 +63,12 @@ describe('copyToClipboard', () => {
     const original = globalThis.ClipboardItem;
     // @ts-expect-error - simulate missing ClipboardItem
     globalThis.ClipboardItem = undefined;
-    const writeText = vi.fn(async () => { });
+    const writeText = vi.fn(async () => {});
     Object.defineProperty(navigator, 'clipboard', {
       configurable: true,
-      value: { writeText, write: vi.fn(async () => { }) },
+      value: { writeText, write: vi.fn(async () => {}) },
     });
-    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => { });
+    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
 
     await copyToClipboard('Done:', 'hello');
 

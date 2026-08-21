@@ -23,7 +23,10 @@ export async function sleep(ms: number): Promise<void> {
  * @param {string} selector
  * @param {number} maxRetry
  */
-export async function waitForElement(selector: string, maxRetry = 10): Promise<Element | null> {
+export async function waitForElement(
+  selector: string,
+  maxRetry = 10,
+): Promise<Element | null> {
   for (let i = 0; i < maxRetry; i++) {
     const element = document.querySelector(selector);
     if (element) return element;

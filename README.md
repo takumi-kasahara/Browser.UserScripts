@@ -43,13 +43,13 @@ dist/                               # Built user scripts (generated)
 
 ### Installation
 
-``` bash
+```bash
 npm install
 ```
 
 ### Build
 
-``` bash
+```bash
 npm run build
 ```
 

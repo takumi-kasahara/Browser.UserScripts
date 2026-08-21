@@ -19,15 +19,13 @@ window.addEventListener('load', () => {
    * @param value
    */
   function setValue(element: HTMLElement | null, value: string | null): void {
-    if (element instanceof HTMLInputElement)
-      element.value = value ?? '';
+    if (element instanceof HTMLInputElement) element.value = value ?? '';
   }
   /**
    * @param element
    * @param checked
    */
   function setChecked(element: HTMLElement | null, checked: boolean): void {
-    if (element instanceof HTMLInputElement)
-      element.checked = checked;
+    if (element instanceof HTMLInputElement) element.checked = checked;
   }
 });
