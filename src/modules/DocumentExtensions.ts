@@ -7,7 +7,6 @@ export function createAnchorElement(url: string, text: string): string {
   a.href = url;
   a.rel = 'noreferrer';
   a.target = '_blank';
-  // @ts-expect-error - setHTML is not in the current @types/web DOM lib
   a.setHTML(text ? text : url);
   return a.outerHTML;
 }
