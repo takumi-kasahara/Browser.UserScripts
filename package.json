@@ -12,18 +12,18 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@types/node": "^26.1.2",
+    "@types/node": "^26.2.0",
     "@types/web": "^0.0.354",
-    "@vitest/coverage-v8": "^4.1.10",
+    "@vitest/coverage-v8": "^4.1.11",
     "adm-zip": "^0.6.0",
-    "esbuild": "^0.28.1",
-    "eslint": "^10.8.0",
-    "globals": "^17.8.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.9.0",
+    "globals": "^17.11.0",
     "jsdom": "^30.0.1",
     "markdownlint-cli2": "^0.23.2",
     "prettier": "^3.9.6",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.65.0",
-    "vitest": "^4.1.10"
+    "typescript-eslint": "^8.67.0",
+    "vitest": "^4.1.11"
   }
 }
