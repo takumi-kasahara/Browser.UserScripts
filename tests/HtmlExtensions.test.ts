@@ -4,7 +4,7 @@ import {
   escape,
   extractElement,
   visible,
-} from './HtmlExtensions.js';
+} from '../src/modules/HtmlExtensions.js';
 
 describe('escape', () => {
   it('escapes &, <, >', () => {

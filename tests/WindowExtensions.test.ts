@@ -7,7 +7,7 @@ import {
   open,
   select,
   tryFetch,
-} from './WindowExtensions.js';
+} from '../src/modules/WindowExtensions.js';
 
 /** Build a Response-like object with a url property (jsdom Response lacks url). */
 function mockResponse(status: number, url: string): Response {

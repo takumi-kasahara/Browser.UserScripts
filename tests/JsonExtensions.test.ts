@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { extractObjects, tryParse } from './JsonExtensions.js';
+import { extractObjects, tryParse } from '../src/modules/JsonExtensions.js';
 
 describe('tryParse', () => {
   it('parses valid JSON', () => {

@@ -4,12 +4,12 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    include: ['src/**/*.test.ts'],
+    include: ['tests/**/*.test.ts'],
     setupFiles: ['tests/setup.ts'],
     coverage: {
       provider: 'v8',
       include: ['src/modules/**/*.ts'],
-      exclude: ['src/**/*.test.ts'],
+      exclude: ['tests/**/*.test.ts'],
     },
   },
 });
