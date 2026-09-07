@@ -11,7 +11,8 @@
   async function copyToClipboard(message, item) {
     try {
       if (typeof item === "string") await navigator.clipboard.writeText(item);
-      else if (item instanceof ClipboardItem) await navigator.clipboard.write([item]);
+      else if (item instanceof ClipboardItem)
+        await navigator.clipboard.write([item]);
       window.alert(message);
     } catch (e) {
       if (!(e instanceof Error)) throw e;
@@ -27,8 +28,13 @@
     const digits = String(urls.length).length;
     for (const [index, url] of urls.entries()) {
       const remaining = urls.length - index;
-      if (urls.length > 1 && remaining > 0 && mod(index, PAGE_SIZE) === 0 && !window.confirm(`Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, "0")} / ${urls.length})`)) {
-        await copyToClipboard(`Copy ${urls.length - index} URL(s):`, urls.slice(index).join("\n"));
+      if (urls.length > 1 && remaining > 0 && mod(index, PAGE_SIZE) === 0 && !window.confirm(
+        `Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, "0")} / ${urls.length})`
+      )) {
+        await copyToClipboard(
+          `Copy ${urls.length - index} URL(s):`,
+          urls.slice(index).join("\n")
+        );
         return;
       }
       window.open(url, "_blank", "noreferrer");
@@ -50,13 +56,10 @@
       button.style.position = "relative";
       button.style.top = "50%";
       button.style.transform = "translateY(-50%)";
-      button.addEventListener(
-        "click",
-        async () => {
-          const urls = extract().map((isbn10) => from(isbn10));
-          await open(urls);
-        }
-      );
+      button.addEventListener("click", async () => {
+        const urls = extract().map((isbn10) => from(isbn10));
+        await open(urls);
+      });
       const element = document.createElement("div");
       element.style.float = "left";
       element.style.height = "36px";

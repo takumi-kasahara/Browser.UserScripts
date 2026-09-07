@@ -93,7 +93,7 @@ export async function exists(
   urlLike: URL | string | { href: string } | { src: string },
 ): Promise<boolean> {
   const url = from(urlLike);
-  if (location.href === url.href) return true;
+  if (equiv(location, url)) return true;
   try {
     const head = await fetch(url, { method: 'HEAD' });
     if (head.ok) return equiv(url, head.url);

@@ -17,12 +17,10 @@
     setValue(document.getElementById("create_on_s"), null);
     setChecked(document.getElementById("read_at_null"), true);
     function setValue(element, value) {
-      if (element instanceof HTMLInputElement)
-        element.value = value ?? "";
+      if (element instanceof HTMLInputElement) element.value = value ?? "";
     }
     function setChecked(element, checked) {
-      if (element instanceof HTMLInputElement)
-        element.checked = checked;
+      if (element instanceof HTMLInputElement) element.checked = checked;
     }
   });
 })();

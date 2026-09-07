@@ -15,7 +15,9 @@
       for (const mutation of mutations)
         for (const node of mutation.addedNodes)
           if (node instanceof HTMLElement && node.id === "xlo-tab-undone") {
-            const es = Array.from(node.getElementsByClassName("xlo-store-entry")).filter((e) => e instanceof HTMLElement);
+            const es = Array.from(
+              node.getElementsByClassName("xlo-store-entry")
+            ).filter((e) => e instanceof HTMLElement);
             if (es.length === 0) continue;
             for (const e of es) e.click();
             observer.disconnect();

@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run build:gm && npm run build:zip",
-    "build:gm": "node --experimental-strip-types .tools/build.gm.ts",
+    "build:gm": "node --experimental-strip-types .tools/build.gm.ts && npm run lint",
     "build:zip": "node --experimental-strip-types .tools/build.zip.ts",
     "lint": "prettier --write . && markdownlint-cli2 --fix . && eslint --fix .",
     "test": "vitest run",

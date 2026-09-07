@@ -11,7 +11,8 @@
   function available(element) {
     if (!element) throw new TypeError("Element is required.");
     if (!element.isConnected) return false;
-    if ((element instanceof HTMLButtonElement || element instanceof HTMLFieldSetElement || element instanceof HTMLInputElement || element instanceof HTMLOptGroupElement || element instanceof HTMLOptionElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement) && element.disabled) return false;
+    if ((element instanceof HTMLButtonElement || element instanceof HTMLFieldSetElement || element instanceof HTMLInputElement || element instanceof HTMLOptGroupElement || element instanceof HTMLOptionElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement) && element.disabled)
+      return false;
     if (window.getComputedStyle(element).pointerEvents === "none") return false;
     if (!element.parentElement) return true;
     return available(element.parentElement);
@@ -23,7 +24,11 @@
     new MutationObserver((mutations, observer) => {
       for (const mutation of mutations)
         if (mutation.target instanceof HTMLElement) {
-          const es2 = Array.from(mutation.target.querySelectorAll('.result_present > .present_btn > a[role="button"]')).filter((e) => e instanceof HTMLElement).filter((e) => available(e));
+          const es2 = Array.from(
+            mutation.target.querySelectorAll(
+              '.result_present > .present_btn > a[role="button"]'
+            )
+          ).filter((e) => e instanceof HTMLElement).filter((e) => available(e));
           if (es2.length === 0) continue;
           for (const e of es2) e.click();
           observer.disconnect();
@@ -31,11 +36,11 @@
     }).observe(target, {
       subtree: true,
       attributes: true,
-      attributeFilter: [
-        "class"
-      ]
+      attributeFilter: ["class"]
     });
-    const es = Array.from(document.querySelectorAll(".omikuji_start > .btn_area > a")).filter((e) => e instanceof HTMLElement).filter((e) => available(e));
+    const es = Array.from(
+      document.querySelectorAll(".omikuji_start > .btn_area > a")
+    ).filter((e) => e instanceof HTMLElement).filter((e) => available(e));
     if (es.length > 0) for (const e of es) e.click();
   });
 })();

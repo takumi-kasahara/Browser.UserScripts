@@ -12,7 +12,8 @@
   async function copyToClipboard(message, item) {
     try {
       if (typeof item === "string") await navigator.clipboard.writeText(item);
-      else if (item instanceof ClipboardItem) await navigator.clipboard.write([item]);
+      else if (item instanceof ClipboardItem)
+        await navigator.clipboard.write([item]);
       window.alert(message);
     } catch (e) {
       if (!(e instanceof Error)) throw e;
@@ -28,8 +29,13 @@
     const digits = String(urls.length).length;
     for (const [index, url] of urls.entries()) {
       const remaining = urls.length - index;
-      if (urls.length > 1 && remaining > 0 && mod(index, PAGE_SIZE) === 0 && !window.confirm(`Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, "0")} / ${urls.length})`)) {
-        await copyToClipboard(`Copy ${urls.length - index} URL(s):`, urls.slice(index).join("\n"));
+      if (urls.length > 1 && remaining > 0 && mod(index, PAGE_SIZE) === 0 && !window.confirm(
+        `Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, "0")} / ${urls.length})`
+      )) {
+        await copyToClipboard(
+          `Copy ${urls.length - index} URL(s):`,
+          urls.slice(index).join("\n")
+        );
         return;
       }
       window.open(url, "_blank", "noreferrer");
@@ -47,13 +53,10 @@
         button.appendChild(document.createTextNode(label));
         button.setAttribute("type", "button");
         button.classList.add("btn", "btn-sm", "btn-default");
-        button.addEventListener(
-          "click",
-          async () => {
-            const urls = extract2().map((isbn10) => from(isbn10));
-            await open(urls);
-          }
-        );
+        button.addEventListener("click", async () => {
+          const urls = extract2().map((isbn10) => from(isbn10));
+          await open(urls);
+        });
         element.appendChild(button);
       }, extract2 = function() {
         const isbn10 = document.querySelector('span[itemprop="isbn10"]')?.textContent?.trim();
@@ -65,23 +68,17 @@
       addButton2("booklog", (isbn10) => `https://booklog.jp/item/1/${isbn10}`);
       addButton2("bookmeter", (isbn10) => `https://bookmeter.com/b/${isbn10}`);
       addButton2("calil", (isbn10) => `https://calil.jp/book/${isbn10}`);
-      document.querySelector(".book-col-frame")?.insertBefore(
-        element,
-        document.querySelector(".book-cart")
-      );
+      document.querySelector(".book-col-frame")?.insertBefore(element, document.querySelector(".book-cart"));
     } else if (location.pathname.startsWith("/bd/search/")) {
       let addButton2 = function(label, from) {
         const button = document.createElement("button");
         button.appendChild(document.createTextNode(label));
         button.setAttribute("type", "button");
         button.classList.add("btn", "btn-sm");
-        button.addEventListener(
-          "click",
-          async () => {
-            const urls = extract2().map((isbn10) => from(isbn10));
-            await open(urls);
-          }
-        );
+        button.addEventListener("click", async () => {
+          const urls = extract2().map((isbn10) => from(isbn10));
+          await open(urls);
+        });
         element.appendChild(button);
       }, extract2 = function() {
         const isbn13 = document.querySelector('span[itemprop="isbn13"]')?.textContent?.trim();
@@ -90,7 +87,10 @@
         return isbn10 ? [isbn10] : [];
       }, toISBN102 = function(isbn13) {
         if (!/^\d{13}$/.test(isbn13)) return null;
-        const sum = Array.from(isbn13.slice(0, 12), (d, i) => Number.parseInt(d, 10) * (i % 2 === 0 ? 1 : 3)).reduce((s, v) => s + v, 0);
+        const sum = Array.from(
+          isbn13.slice(0, 12),
+          (d, i) => Number.parseInt(d, 10) * (i % 2 === 0 ? 1 : 3)
+        ).reduce((s, v) => s + v, 0);
         const check = (10 - sum % 10) % 10;
         return `${isbn13.slice(0, 9)}${check}`;
       };

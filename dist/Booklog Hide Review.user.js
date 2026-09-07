@@ -112,7 +112,11 @@
       "unilibr",
       "utokyo-aglib",
       "utokyogenlib"
-    ].flatMap((id) => Array.from(document.querySelectorAll(`.review:has(a[href="/users/${id}"])`))).filter(Boolean);
+    ].flatMap(
+      (id) => Array.from(
+        document.querySelectorAll(`.review:has(a[href="/users/${id}"])`)
+      )
+    ).filter(Boolean);
     for (const e of es) e.remove();
   });
 })();

@@ -11,7 +11,8 @@
   function available(element) {
     if (!element) throw new TypeError("Element is required.");
     if (!element.isConnected) return false;
-    if ((element instanceof HTMLButtonElement || element instanceof HTMLFieldSetElement || element instanceof HTMLInputElement || element instanceof HTMLOptGroupElement || element instanceof HTMLOptionElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement) && element.disabled) return false;
+    if ((element instanceof HTMLButtonElement || element instanceof HTMLFieldSetElement || element instanceof HTMLInputElement || element instanceof HTMLOptGroupElement || element instanceof HTMLOptionElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement) && element.disabled)
+      return false;
     if (window.getComputedStyle(element).pointerEvents === "none") return false;
     if (!element.parentElement) return true;
     return available(element.parentElement);
@@ -39,9 +40,7 @@
         }
     }).observe(target, {
       attributes: true,
-      attributeFilter: [
-        "style"
-      ]
+      attributeFilter: ["style"]
     });
   });
 })();

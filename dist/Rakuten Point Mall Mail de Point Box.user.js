@@ -15,7 +15,11 @@
       for (const mutation of mutations)
         for (const node of mutation.addedNodes)
           if (node instanceof HTMLElement && node.classList.contains("mailboxBox")) {
-            const urls = Array.from(node.querySelectorAll(".unread > .listCont > a")).filter((e) => e instanceof HTMLAnchorElement).map((a) => a.href);
+            const urls = Array.from(
+              node.querySelectorAll(".unread > .listCont > a")
+            ).filter(
+              (e) => e instanceof HTMLAnchorElement
+            ).map((a) => a.href);
             if (urls.length === 0) continue;
             for (const url of urls) window.open(url, "_blank", "noreferrer");
             observer.disconnect();

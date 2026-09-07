@@ -9,7 +9,11 @@
 (() => {
   // src/scripts/Rakuten Lucky Kuji Open.user.ts
   window.addEventListener("load", async () => {
-    const urls = Array.from(document.querySelectorAll('table[class="table"]')).flatMap((e) => Array.from(e.getElementsByTagName("a"), (a) => a.href));
+    const urls = Array.from(
+      document.querySelectorAll('table[class="table"]')
+    ).flatMap(
+      (e) => Array.from(e.getElementsByTagName("a"), (a) => a.href)
+    );
     for (const url of urls) {
       await new Promise((resolve) => setTimeout(resolve, 5e3));
       window.open(url, "_blank", "noreferrer");

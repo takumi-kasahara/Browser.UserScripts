@@ -24,7 +24,8 @@
   async function copyToClipboard(message, item) {
     try {
       if (typeof item === "string") await navigator.clipboard.writeText(item);
-      else if (item instanceof ClipboardItem) await navigator.clipboard.write([item]);
+      else if (item instanceof ClipboardItem)
+        await navigator.clipboard.write([item]);
       window.alert(message);
     } catch (e) {
       if (!(e instanceof Error)) throw e;
@@ -40,8 +41,13 @@
     const digits = String(urls.length).length;
     for (const [index, url] of urls.entries()) {
       const remaining = urls.length - index;
-      if (urls.length > 1 && remaining > 0 && mod(index, PAGE_SIZE) === 0 && !window.confirm(`Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, "0")} / ${urls.length})`)) {
-        await copyToClipboard(`Copy ${urls.length - index} URL(s):`, urls.slice(index).join("\n"));
+      if (urls.length > 1 && remaining > 0 && mod(index, PAGE_SIZE) === 0 && !window.confirm(
+        `Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, "0")} / ${urls.length})`
+      )) {
+        await copyToClipboard(
+          `Copy ${urls.length - index} URL(s):`,
+          urls.slice(index).join("\n")
+        );
         return;
       }
       window.open(url, "_blank", "noreferrer");
@@ -53,28 +59,52 @@
 
   // src/scripts/ISBN to URL for booklog.jp.user.ts
   window.addEventListener("load", () => {
-    addButton("booklog", (isbn10) => isbn10 ? `https://booklog.jp/item/1/${isbn10}` : null);
-    addButton("bookmeter", (isbn10) => isbn10 ? `https://bookmeter.com/b/${isbn10}` : null);
-    addButton("calil", (isbn10) => isbn10 ? `https://calil.jp/book/${isbn10}` : null);
-    addButton("hanmoto", (isbn10) => isbn10 ? `https://www.hanmoto.com/bd/isbn/${isbn10}` : null);
-    addButton("bookoff", (isbn10, isbn13) => isbn13 ? `https://shopping.bookoff.co.jp/search/keyword/${isbn13}` : null);
-    addButton("netoff", (isbn10, isbn13) => isbn13 ? `https://www.netoff.co.jp/cmdtyallsearch?word=${isbn13}` : null);
-    addButton("e-hon", (isbn10) => isbn10 ? `https://www.e-hon.ne.jp/bec/SA/Detail?refBook=${isbn10}` : null);
-    addButton("maruzenjunkudo", (isbn10, isbn13) => isbn13 ? `https://www.maruzenjunkudo.co.jp/products/${isbn13}` : null);
-    addButton("kinokuniya", (isbn10, isbn13) => isbn13 ? `https://www.kinokuniya.co.jp/f/dsg-01-${isbn13}` : null);
+    addButton(
+      "booklog",
+      (isbn10) => isbn10 ? `https://booklog.jp/item/1/${isbn10}` : null
+    );
+    addButton(
+      "bookmeter",
+      (isbn10) => isbn10 ? `https://bookmeter.com/b/${isbn10}` : null
+    );
+    addButton(
+      "calil",
+      (isbn10) => isbn10 ? `https://calil.jp/book/${isbn10}` : null
+    );
+    addButton(
+      "hanmoto",
+      (isbn10) => isbn10 ? `https://www.hanmoto.com/bd/isbn/${isbn10}` : null
+    );
+    addButton(
+      "bookoff",
+      (isbn10, isbn13) => isbn13 ? `https://shopping.bookoff.co.jp/search/keyword/${isbn13}` : null
+    );
+    addButton(
+      "netoff",
+      (isbn10, isbn13) => isbn13 ? `https://www.netoff.co.jp/cmdtyallsearch?word=${isbn13}` : null
+    );
+    addButton(
+      "e-hon",
+      (isbn10) => isbn10 ? `https://www.e-hon.ne.jp/bec/SA/Detail?refBook=${isbn10}` : null
+    );
+    addButton(
+      "maruzenjunkudo",
+      (isbn10, isbn13) => isbn13 ? `https://www.maruzenjunkudo.co.jp/products/${isbn13}` : null
+    );
+    addButton(
+      "kinokuniya",
+      (isbn10, isbn13) => isbn13 ? `https://www.kinokuniya.co.jp/f/dsg-01-${isbn13}` : null
+    );
     function addButton(label, from) {
       const button = document.createElement("button");
       button.appendChild(document.createTextNode(label));
       button.setAttribute("type", "button");
-      button.addEventListener(
-        "click",
-        async () => {
-          const isbn10 = extract().filter(isISBN10);
-          const isbn13 = await toISBN13(isbn10.join(","));
-          const urls = isbn10.map((e, i) => from(e, isbn13.at(i) ?? "")).filter((url) => typeof url === "string");
-          await open(urls);
-        }
-      );
+      button.addEventListener("click", async () => {
+        const isbn10 = extract().filter(isISBN10);
+        const isbn13 = await toISBN13(isbn10.join(","));
+        const urls = isbn10.map((e, i) => from(e, isbn13.at(i) ?? "")).filter((url) => typeof url === "string");
+        await open(urls);
+      });
       const element = document.createElement("div");
       element.appendChild(button);
       element.style.alignItems = "center";
@@ -113,7 +143,9 @@
       const element = document.querySelector('span[itemprop="isbn"]');
       if (element) return [(element.textContent ?? "").trim()].filter(Boolean);
       try {
-        const response = await fetch(`https://api.openbd.jp/v1/get?isbn=${isbn10}`);
+        const response = await fetch(
+          `https://api.openbd.jp/v1/get?isbn=${isbn10}`
+        );
         const books = await response.json();
         for (const book of books) console.debug(book);
         const values = books.filter(Boolean).map((x) => x.summary.isbn);
