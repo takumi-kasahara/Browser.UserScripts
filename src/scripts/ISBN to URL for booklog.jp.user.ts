@@ -44,7 +44,7 @@ window.addEventListener('load', () => {
   addButton('maruzenjunkudo', (isbn10, isbn13) =>
     isbn13 ? `https://www.maruzenjunkudo.co.jp/products/${isbn13}` : null,
   );
-  addButton('kinokuniya', (isbn10, isbn13) =>
+  addButton('kinokuniya', (_, isbn13) =>
     isbn13 ? `https://www.kinokuniya.co.jp/f/dsg-01-${isbn13}` : null,
   );
 
@@ -54,6 +54,7 @@ window.addEventListener('load', () => {
    */
   function addButton(
     label: string,
+    // eslint-disable-next-line no-unused-vars
     from: (isbn10: string, isbn13: string) => string | null,
   ): void {
     const button = document.createElement('button');

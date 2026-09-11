@@ -24,6 +24,7 @@ window.addEventListener('load', () => {
      * @param label
      * @param from
      */
+    // eslint-disable-next-line no-unused-vars
     function addButton(label: string, from: (isbn10: string) => string): void {
       const button = document.createElement('button');
       button.appendChild(document.createTextNode(label));
@@ -71,6 +72,7 @@ window.addEventListener('load', () => {
      * @param label
      * @param from
      */
+    // eslint-disable-next-line no-unused-vars
     function addButton(label: string, from: (isbn10: string) => string): void {
       const button = document.createElement('button');
       button.appendChild(document.createTextNode(label));

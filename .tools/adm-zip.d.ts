@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 declare module 'adm-zip' {
   export default class AdmZip {
     constructor(fileName?: string);

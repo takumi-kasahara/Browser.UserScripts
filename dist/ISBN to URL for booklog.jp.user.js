@@ -93,7 +93,7 @@
     );
     addButton(
       "kinokuniya",
-      (isbn10, isbn13) => isbn13 ? `https://www.kinokuniya.co.jp/f/dsg-01-${isbn13}` : null
+      (_, isbn13) => isbn13 ? `https://www.kinokuniya.co.jp/f/dsg-01-${isbn13}` : null
     );
     function addButton(label, from) {
       const button = document.createElement("button");
