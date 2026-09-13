@@ -1,0 +1,37 @@
+lockfile_version: "1"
+apm_version: 0.30.0
+dependencies:
+  - repo_url: takumi-kasahara/dotfiles
+    materialization_repo_url: takumi-kasahara/Dotfiles
+    name: userscripts
+    host: github.com
+    resolved_commit: 189721385a658a41f21869a961ab071e8183f198
+    version: unknown
+    virtual_path: .apm/skills/userscripts
+    is_virtual: true
+    package_type: claude_skill
+    deployed_files:
+      - .agents/skills/userscripts
+      - .agents/skills/userscripts/SKILL.md
+    deployed_file_hashes:
+      .agents/skills/userscripts/SKILL.md: sha256:c07af6120bf3a778dc43a0c3b39a36da13179dfc3b0dbd7d61ed37981bbdd70f
+    content_hash: sha256:6c9cfb77a2be5f4b638a5dbe3d002545b695547ef65ef9284d8d8e4358193206
+deployments:
+  - kind: project-relative
+    target: copilot
+    value: .agents/skills/userscripts
+    runtime: null
+    scope: project
+    owners:
+      - takumi-kasahara/dotfiles/.apm/skills/userscripts
+    active_owner: takumi-kasahara/dotfiles/.apm/skills/userscripts
+    content_hash: null
+  - kind: project-relative
+    target: copilot
+    value: .agents/skills/userscripts/SKILL.md
+    runtime: null
+    scope: project
+    owners:
+      - takumi-kasahara/dotfiles/.apm/skills/userscripts
+    active_owner: takumi-kasahara/dotfiles/.apm/skills/userscripts
+    content_hash: sha256:c07af6120bf3a778dc43a0c3b39a36da13179dfc3b0dbd7d61ed37981bbdd70f
