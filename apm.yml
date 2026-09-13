@@ -1,0 +1,12 @@
+name: AutoHotkey.Scripts
+version: 1.0.0
+description: APM project for AutoHotkey.Scripts
+author: takumi-kasahara
+targets:
+  - copilot
+dependencies:
+  apm:
+    - takumi-kasahara/Dotfiles/.apm/skills/userscripts
+  mcp: []
+includes: auto
+scripts: {}
