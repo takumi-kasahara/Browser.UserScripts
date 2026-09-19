@@ -15,7 +15,7 @@
     "@types/node": "^26.2.0",
     "@types/web": "^0.0.354",
     "@vitest/coverage-v8": "^4.1.11",
-    "adm-zip": "^0.6.0",
+    "adm-zip": "^0.6.1",
     "esbuild": "^0.28.2",
     "eslint": "^10.9.0",
     "globals": "^17.11.0",
