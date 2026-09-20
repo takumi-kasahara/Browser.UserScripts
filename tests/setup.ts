@@ -25,7 +25,11 @@ if (!navigator.clipboard) {
     configurable: true,
     value: {
       writeText: async (_text: string): Promise<void> => {}, // eslint-disable-line no-unused-vars
-      write: async (_items: ClipboardItem[]): Promise<void> => {}, // eslint-disable-line no-unused-vars
+        void _text;
+      },
+      write: async (_items: ClipboardItem[]): Promise<void> => {
+        void _items;
+      },
     },
   });
 }
@@ -45,8 +49,7 @@ if (
 ) {
   Object.defineProperty(HTMLAnchorElement.prototype, 'origin', {
     configurable: true,
-    // eslint-disable-next-line no-unused-vars
-    get(this: HTMLAnchorElement) {
+    get() {
       try {
         return new URL(this.href).origin;
       }

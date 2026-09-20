@@ -7,8 +7,7 @@ export function select(): Selection | null {
 
   const range = selection.getRangeAt(0);
   const ancestor = range.commonAncestorContainer;
-  const node
-    = ancestor instanceof HTMLElement ? ancestor : ancestor.parentElement;
+  const node = ancestor.parentElement;
   if (!node) return selection;
   range.selectNodeContents(node);
   selection.removeAllRanges();

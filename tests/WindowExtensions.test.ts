@@ -60,7 +60,7 @@ describe('select', () => {
     expect(result!.getRangeAt(0).commonAncestorContainer).toBe(root);
   });
 
-  it('returns the selection when the ancestor has no parent element', () => {
+  it('expands the selection to the parent element when the ancestor has one', () => {
     document.body.innerHTML = '<div id="root">plain</div>';
     const root = document.getElementById('root')!;
     const range = document.createRange();
@@ -71,7 +71,7 @@ describe('select', () => {
 
     const result = select();
     expect(result).not.toBeNull();
-    expect(result!.getRangeAt(0).commonAncestorContainer).toBe(root);
+    expect(result!.getRangeAt(0).commonAncestorContainer).toBe(document.body);
   });
 });
 
