@@ -1,0 +1,29 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:gm && npm run build:zip",
+    "build:gm": "node --experimental-strip-types .tools/build.gm.ts && npm run lint",
+    "build:zip": "node --experimental-strip-types .tools/build.zip.ts",
+    "lint": "prettier --write . && markdownlint-cli2 --fix . && eslint --fix .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/node": "^26.6.3",
+    "@types/web": "^0.0.354",
+    "@vitest/coverage-v8": "^4.1.11",
+    "adm-zip": "^0.6.1",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
+    "jsdom": "^30.1.1",
+    "markdownlint-cli2": "^0.23.3",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^4.1.11"
+  }
+}
