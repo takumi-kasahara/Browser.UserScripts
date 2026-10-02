@@ -24,7 +24,7 @@ if (!navigator.clipboard) {
   Object.defineProperty(navigator, 'clipboard', {
     configurable: true,
     value: {
-      writeText: async (_text: string): Promise<void> => {}, // eslint-disable-line no-unused-vars
+      writeText: async (_text: string): Promise<void> => {
         void _text;
       },
       write: async (_items: ClipboardItem[]): Promise<void> => {
