@@ -125,7 +125,7 @@ describe('equiv', () => {
   });
 
   it('detects differing origins', () => {
-    expect(equiv('https://example.com/a', 'https://other.com/a')).toBe(false);
+    expect(equiv('https://example.com/a', 'https://example.org/a')).toBe(false);
   });
 });
 
@@ -143,7 +143,7 @@ describe('is', () => {
   });
 
   it('does not match an unrelated domain', () => {
-    expect(is('other.com')).toBe(false);
+    expect(is('example.com')).toBe(false);
   });
 });
 
@@ -166,7 +166,7 @@ describe('tryFetch', () => {
   it('returns exists:true on HEAD 200', async () => {
     Object.defineProperty(window, 'location', {
       configurable: true,
-      value: new URL('https://other.com/'),
+      value: new URL('https://example.com/'),
     });
     vi.stubGlobal(
       'fetch',
@@ -179,7 +179,7 @@ describe('tryFetch', () => {
   it('falls back to GET on 403/405', async () => {
     Object.defineProperty(window, 'location', {
       configurable: true,
-      value: new URL('https://other.com/'),
+      value: new URL('https://example.com/'),
     });
     const fetchMock = vi
       .fn()
@@ -194,7 +194,7 @@ describe('tryFetch', () => {
   it('returns exists:false on 404', async () => {
     Object.defineProperty(window, 'location', {
       configurable: true,
-      value: new URL('https://other.com/'),
+      value: new URL('https://example.com/'),
     });
     vi.stubGlobal(
       'fetch',
@@ -207,7 +207,7 @@ describe('tryFetch', () => {
   it('returns exists:false when fetch throws', async () => {
     Object.defineProperty(window, 'location', {
       configurable: true,
-      value: new URL('https://other.com/'),
+      value: new URL('https://example.com/'),
     });
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     vi.stubGlobal(
@@ -219,6 +219,20 @@ describe('tryFetch', () => {
     const result = await tryFetch(new URL('https://example.com/a'));
     expect(result.exists).toBe(false);
     warn.mockRestore();
+  });
+
+  it('returns false for unsupported protocol without calling fetch', async () => {
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: new URL('https://example.com/'),
+    });
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    const result = await tryFetch('data:text/plain,hello');
+    expect(result.exists).toBe(false);
+    expect(result.url).toBe('data:text/plain,hello');
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });
 
@@ -238,7 +252,7 @@ describe('exists', () => {
   it('returns true on HEAD 200', async () => {
     Object.defineProperty(window, 'location', {
       configurable: true,
-      value: new URL('https://other.com/'),
+      value: new URL('https://example.com/'),
     });
     vi.stubGlobal(
       'fetch',
@@ -250,13 +264,39 @@ describe('exists', () => {
   it('returns false on 404', async () => {
     Object.defineProperty(window, 'location', {
       configurable: true,
-      value: new URL('https://other.com/'),
+      value: new URL('https://example.com/'),
     });
     vi.stubGlobal(
       'fetch',
       vi.fn(async () => mockResponse(404, 'https://example.com/a')),
     );
     expect(await exists(new URL('https://example.com/a'))).toBe(false);
+  });
+
+  it('returns false for custom protocol without calling fetch', async () => {
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: new URL('https://example.com/'),
+    });
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    const result = await exists('httpx://example.com');
+    expect(result).toBe(false);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('returns false for custom protocol without calling fetch', async () => {
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: new URL('https://example.com/'),
+    });
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    const result = await exists('xhttp://example.com');
+    expect(result).toBe(false);
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });
 
