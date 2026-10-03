@@ -68,6 +68,7 @@ export async function tryFetch(
   urlLike: URL | string | { href: string } | { src: string },
 ): Promise<{ exists: boolean; url: string }> {
   const url = from(urlLike);
+  if (!/^https?:$/.test(url.protocol)) return { exists: false, url: url.href };
   if (equiv(location, url)) return { exists: true, url: url.href };
   try {
     const head = await fetch(url, { method: 'HEAD' });
@@ -92,6 +93,7 @@ export async function exists(
   urlLike: URL | string | { href: string } | { src: string },
 ): Promise<boolean> {
   const url = from(urlLike);
+  if (!/^https?:$/.test(url.protocol)) return false;
   if (equiv(location, url)) return true;
   try {
     const head = await fetch(url, { method: 'HEAD' });

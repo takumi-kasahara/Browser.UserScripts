@@ -17,6 +17,7 @@
   // src/modules/WindowExtensions.ts
   async function tryFetch(urlLike) {
     const url = from(urlLike);
+    if (!/^https?:$/.test(url.protocol)) return { exists: false, url: url.href };
     if (equiv(location, url)) return { exists: true, url: url.href };
     try {
       const head = await fetch(url, { method: "HEAD" });
