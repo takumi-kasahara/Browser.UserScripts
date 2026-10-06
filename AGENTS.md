@@ -76,12 +76,11 @@ Key metadata fields:
 
 ## Project Configuration Files
 
-- `eslint.config.mjs` - ESLint rules (ensure consistency with coding conventions)
-- `jsconfig.json` - JavaScript configuration and type hints for VSCode
-- `.tools/build.gm.js` - Build script for Greasemonkey user scripts
-- `.tools/build.zip.js` - Build script for creating zip archives
-
-## References
-
-- [Greasespot Wiki](https://wiki.greasespot.net/Main_Page)
-- [Metadata Block](https://wiki.greasespot.net/Metadata_Block)
+- `eslint.config.mjs`
+  - ESLint rules (ensure consistency with coding conventions)
+- `jsconfig.json`
+  - JavaScript configuration and type hints for VSCode
+- `.tools/build.gm.js`
+  - Build script for Greasemonkey user scripts
+- `.tools/build.zip.js`
+  - Build script for creating zip archives
