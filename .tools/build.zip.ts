@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+import AdmZip from 'adm-zip';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import AdmZip from 'adm-zip';
 
 (() => {
   const rootDir = getRootDir();
@@ -18,7 +18,7 @@ import AdmZip from 'adm-zip';
 
   const fileNames = collectUserScripts(outDir);
   if (fileNames.length === 0) {
-    console.warn(`${outDir}/*.user.js not found.`);
+    console.error(`${outDir}/*.user.js not found.`);
     return;
   }
 
@@ -67,7 +67,10 @@ import AdmZip from 'adm-zip';
       zip.deleteFile(entryName);
       console.debug('replace:', entryName);
     }
-    else throw new Error(`entry not found:\t${entryName}`);
+    else {
+      console.error(entryName, 'entry not found.');
+      return;
+    }
     const zipPath = entryName.split('/').slice(0, -1).join('/');
     zip.addLocalFile(localPath, zipPath, path.basename(entryName));
   }
