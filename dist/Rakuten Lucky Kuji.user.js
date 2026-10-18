@@ -28,8 +28,7 @@
 
   // src/scripts/Rakuten Lucky Kuji.user.ts
   window.addEventListener("load", () => {
-    if (location.href.match(/\/(lose|win|already)/))
-      window.open("about:blank", "_self")?.close();
+    if (location.href.match(/\/(lose|win|already)/)) window.close();
     const target = document.getElementById("entry");
     if (!target) throw new Error("Target not found.");
     new MutationObserver((mutations, observer) => {

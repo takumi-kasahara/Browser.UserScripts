@@ -306,40 +306,41 @@ describe('open', () => {
   });
 
   it('does nothing for an empty list', async () => {
-    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+    const openSpy = vi.spyOn(GM, 'openInTab').mockImplementation(() => {});
     const confirmSpy = vi
       .spyOn(window, 'confirm')
       .mockImplementation(() => true);
-    await open([]);
+    open([]);
     expect(openSpy).not.toHaveBeenCalled();
     expect(confirmSpy).not.toHaveBeenCalled();
   });
 
   it('opens a single url without confirmation', async () => {
-    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+    const openSpy = vi.spyOn(GM, 'openInTab').mockImplementation(() => {});
     const confirmSpy = vi
       .spyOn(window, 'confirm')
       .mockImplementation(() => true);
-    await open(['https://example.com/a']);
+    open(['https://example.com/a']);
     expect(confirmSpy).not.toHaveBeenCalled();
     expect(openSpy).toHaveBeenCalledTimes(1);
   });
 
   it('confirms before opening multiple urls', async () => {
-    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+    const openSpy = vi.spyOn(GM, 'openInTab').mockImplementation(() => {});
     const confirmSpy = vi
       .spyOn(window, 'confirm')
       .mockImplementation(() => true);
-    await open(['https://example.com/a', 'https://example.com/b']);
+    open(['https://example.com/a', 'https://example.com/b']);
     expect(confirmSpy).toHaveBeenCalledTimes(1);
     expect(openSpy).toHaveBeenCalledTimes(2);
   });
 
-  it('falls back to copyToClipboard when confirmation is cancelled', async () => {
-    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+  it('falls back to setClipboard when confirmation is cancelled', async () => {
+    const openSpy = vi.spyOn(GM, 'openInTab').mockImplementation(() => {});
     vi.spyOn(window, 'confirm').mockImplementation(() => false);
+    vi.spyOn(GM, 'setClipboard').mockImplementation(() => {});
     const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
-    await open([
+    open([
       'https://example.com/a',
       'https://example.com/b',
       'https://example.com/c',

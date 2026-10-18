@@ -13,6 +13,6 @@ window.addEventListener('load', async () => {
   );
   for (const url of urls) {
     await new Promise(resolve => setTimeout(resolve, 5000));
-    window.open(url, '_blank', 'noreferrer');
+    GM.openInTab(url);
   }
 });

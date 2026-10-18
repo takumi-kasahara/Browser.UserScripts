@@ -16,7 +16,7 @@
     );
     for (const url of urls) {
       await new Promise((resolve) => setTimeout(resolve, 5e3));
-      window.open(url, "_blank", "noreferrer");
+      GM.openInTab(url);
     }
   });
 })();

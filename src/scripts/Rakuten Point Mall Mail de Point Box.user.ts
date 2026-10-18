@@ -24,7 +24,7 @@ window.addEventListener('load', () => {
             )
             .map(a => a.href);
           if (urls.length === 0) continue;
-          for (const url of urls) window.open(url, '_blank', 'noreferrer');
+          for (const url of urls) GM.openInTab(url);
           observer.disconnect();
         }
   }).observe(target, {

@@ -25,7 +25,7 @@ window.addEventListener('load', () => {
     button.style.transform = 'translateY(-50%)';
     button.addEventListener('click', async () => {
       const urls = extract().map(isbn10 => from(isbn10));
-      await open(urls);
+      open(urls);
     });
     const element = document.createElement('div');
     element.style.float = 'left';

@@ -66,7 +66,7 @@ window.addEventListener('load', () => {
       const urls = isbn10
         .map((e, i) => from(e, isbn13.at(i) ?? ''))
         .filter((url): url is string => typeof url === 'string');
-      await open(urls);
+      open(urls);
     });
     const element = document.createElement('div');
     element.appendChild(button);

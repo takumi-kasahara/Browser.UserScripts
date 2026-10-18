@@ -7,7 +7,7 @@
 // ==/UserScript==
 import { visible } from '../modules/HtmlExtensions.js';
 window.addEventListener('load', () => {
-  if (location.search) window.open('about:blank', '_self')?.close();
+  if (location.search) window.close();
 
   const target = document.getElementById('tametoku-mode-kuji-contents');
   if (!target) throw new Error('Target not found.');

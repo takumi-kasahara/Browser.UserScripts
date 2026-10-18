@@ -20,22 +20,8 @@
 // ==/UserScript==
 "use strict";
 (() => {
-  // src/modules/NavigatorExtensions.ts
-  async function copyToClipboard(message, item) {
-    try {
-      if (typeof item === "string") await navigator.clipboard.writeText(item);
-      else if (item instanceof ClipboardItem)
-        await navigator.clipboard.write([item]);
-      window.alert(message);
-    } catch (e) {
-      if (!(e instanceof Error)) throw e;
-      console.warn(e.message);
-      void window.prompt(message, String(item));
-    }
-  }
-
   // src/modules/WindowExtensions.ts
-  async function open(urls) {
+  function open(urls) {
     if (!urls || urls.length === 0) return;
     const PAGE_SIZE = 20;
     const digits = String(urls.length).length;
@@ -44,13 +30,11 @@
       if (urls.length > 1 && remaining > 0 && mod(index, PAGE_SIZE) === 0 && !window.confirm(
         `Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, "0")} / ${urls.length})`
       )) {
-        await copyToClipboard(
-          `Copy ${urls.length - index} URL(s):`,
-          urls.slice(index).join("\n")
-        );
+        GM.setClipboard(urls.slice(index).join("\n"));
+        window.alert(`Copy ${urls.length - index} URL(s):`);
         return;
       }
-      window.open(url, "_blank", "noreferrer");
+      GM.openInTab(url);
     }
     function mod(number, divisor) {
       return number - Math.floor(number / divisor) * divisor;
@@ -103,7 +87,7 @@
         const isbn10 = extract().filter(isISBN10);
         const isbn13 = await toISBN13(isbn10.join(","));
         const urls = isbn10.map((e, i) => from(e, isbn13.at(i) ?? "")).filter((url) => typeof url === "string");
-        await open(urls);
+        open(urls);
       });
       const element = document.createElement("div");
       element.appendChild(button);

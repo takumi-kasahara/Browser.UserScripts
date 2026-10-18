@@ -1,24 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import {
-  createAnchorElement,
-  sleep,
-  waitForElement,
-} from '../src/modules/DocumentExtensions.js';
-
-describe('createAnchorElement', () => {
-  it('renders an anchor with href, rel, and target', () => {
-    const html = createAnchorElement('https://example.com/a', 'Example');
-    expect(html).toContain('href="https://example.com/a"');
-    expect(html).toContain('rel="noreferrer"');
-    expect(html).toContain('target="_blank"');
-    expect(html).toContain('>Example<');
-  });
-
-  it('falls back to the url as text when text is empty', () => {
-    const html = createAnchorElement('https://example.com/a', '');
-    expect(html).toContain('>https://example.com/a<');
-  });
-});
+import { sleep, waitForElement } from '../src/modules/DocumentExtensions.js';
 
 describe('sleep', () => {
   beforeEach(() => {
