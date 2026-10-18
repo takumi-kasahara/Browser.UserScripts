@@ -3,7 +3,7 @@
 
 // Greasemonkey API (granted via @grant in the UserScript metadata header).
 declare const GM: {
-  notification(opts: {
+  notification(options: {
     text: string;
     title: string;
     image?: unknown;
