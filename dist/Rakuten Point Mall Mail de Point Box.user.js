@@ -3,7 +3,7 @@
 // @namespace https://github.com/takumi-kasahara
 // @version   1.0.0
 // @match     https://member.pointmail.rakuten.co.jp/box
-// @grant     none
+// @grant     GM.openInTab
 // ==/UserScript==
 "use strict";
 (() => {
@@ -21,7 +21,7 @@
               (e) => e instanceof HTMLAnchorElement
             ).map((a) => a.href);
             if (urls.length === 0) continue;
-            for (const url of urls) window.open(url, "_blank", "noreferrer");
+            for (const url of urls) GM.openInTab(url);
             observer.disconnect();
           }
     }).observe(target, {

@@ -3,7 +3,7 @@
 // @namespace https://github.com/takumi-kasahara
 // @version   1.0.0
 // @match     https://rakucoin.appspot.com/rakuten/kuji/
-// @grant     none
+// @grant     GM.openInTab
 // ==/UserScript==
 window.addEventListener('load', async () => {
   const urls = Array.from(
@@ -13,6 +13,6 @@ window.addEventListener('load', async () => {
   );
   for (const url of urls) {
     await new Promise(resolve => setTimeout(resolve, 5000));
-    window.open(url, '_blank', 'noreferrer');
+    GM.openInTab(url);
   }
 });

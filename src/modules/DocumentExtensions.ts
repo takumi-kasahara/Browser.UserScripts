@@ -1,17 +1,4 @@
 /**
- * @param {string} url
- * @param {string} text
- */
-export function createAnchorElement(url: string, text: string): string {
-  const a = document.createElement('a');
-  a.href = url;
-  a.rel = 'noreferrer';
-  a.target = '_blank';
-  a.setHTML(text ? text : url);
-  return a.outerHTML;
-}
-
-/**
  * @param {number} ms
  */
 export async function sleep(ms: number): Promise<void> {

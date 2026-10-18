@@ -4,7 +4,8 @@
 // @version   1.0.0
 // @match     https://www.hanmoto.com/bd/isbn/*
 // @match     https://www.hanmoto.com/bd/search/*
-// @grant     none
+// @grant     GM.openInTab
+// @grant     GM.setClipboard
 // ==/UserScript==
 import { open } from '../modules/WindowExtensions.js';
 window.addEventListener('load', () => {
@@ -32,7 +33,7 @@ window.addEventListener('load', () => {
       button.classList.add('btn', 'btn-sm', 'btn-default');
       button.addEventListener('click', async () => {
         const urls = extract().map(isbn10 => from(isbn10));
-        await open(urls);
+        open(urls);
       });
       element.appendChild(button);
     }
@@ -80,7 +81,7 @@ window.addEventListener('load', () => {
       button.classList.add('btn', 'btn-sm');
       button.addEventListener('click', async () => {
         const urls = extract().map(isbn10 => from(isbn10));
-        await open(urls);
+        open(urls);
       });
       element.appendChild(button);
     }

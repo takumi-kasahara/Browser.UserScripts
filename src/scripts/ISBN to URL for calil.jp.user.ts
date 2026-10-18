@@ -4,7 +4,8 @@
 // @version   1.0.0
 // @match     https://calil.jp/list/*
 // @match     https://calil.jp/recipe/*
-// @grant     none
+// @grant     GM.openInTab
+// @grant     GM.setClipboard
 // ==/UserScript==
 import { open } from '../modules/WindowExtensions.js';
 window.addEventListener('load', () => {
@@ -23,7 +24,7 @@ window.addEventListener('load', () => {
     button.setAttribute('type', 'button');
     button.addEventListener('click', async () => {
       const urls = extract().map(isbn10 => from(isbn10));
-      await open(urls);
+      open(urls);
     });
     document
       .querySelector('.container')

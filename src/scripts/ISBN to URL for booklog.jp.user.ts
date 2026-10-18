@@ -16,7 +16,8 @@
 // @exclude   https://booklog.jp/users/*/profile
 // @exclude   https://booklog.jp/users/*/review/*
 // @exclude   https://booklog.jp/users/*/stats
-// @grant     none
+// @grant     GM.openInTab
+// @grant     GM.setClipboard
 // ==/UserScript==
 import { open } from '../modules/WindowExtensions.js';
 window.addEventListener('load', () => {
@@ -66,7 +67,7 @@ window.addEventListener('load', () => {
       const urls = isbn10
         .map((e, i) => from(e, isbn13.at(i) ?? ''))
         .filter((url): url is string => typeof url === 'string');
-      await open(urls);
+      open(urls);
     });
     const element = document.createElement('div');
     element.appendChild(button);
