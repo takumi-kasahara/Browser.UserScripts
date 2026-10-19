@@ -42,23 +42,6 @@ This generates:
 - `bin/Greasemonkey.zip`
   - Zip archive for bulk installation
 
-## 📝 User Script Format
-
-All scripts follow Greasemonkey's user script metadata format:
-
-```javascript
-// ==UserScript==
-// @name         Script Name
-// @namespace    https://github.com/takumi-kasahara
-// @version      1.0
-// @description  Brief description
-// @author       takumi-kasahara
-// @match        https://example.com/*
-// @icon         data:image/gif;base64,...
-// @grant        none
-// ==/UserScript==
-```
-
 ## ⚙️ Compatibility
 
 - Target Environment: Latest Firefox with Greasemonkey

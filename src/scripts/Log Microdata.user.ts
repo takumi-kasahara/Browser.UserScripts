@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name        Log Microdata
-// @description Logs Microdata to the console and updates the document title based on the data.
-// @version     1.0.0
-// @grant       none
+// @name      Log Microdata
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @grant     none
 // @noframes
 // ==/UserScript==
 import { extractElement } from '../modules/HtmlExtensions.js';

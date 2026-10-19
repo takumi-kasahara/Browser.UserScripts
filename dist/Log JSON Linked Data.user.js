@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name        Log JSON Linked Data
-// @description Logs JSON Linked Data to the console and updates the document title based on the data.
-// @version     1.0.0
-// @grant       none
+// @name      Log JSON Linked Data
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @grant     none
 // @noframes
 // ==/UserScript==
 "use strict";

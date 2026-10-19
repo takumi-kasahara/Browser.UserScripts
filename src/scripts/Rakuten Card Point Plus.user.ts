@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Card Point Plus
-// @description Automatically clicks on new point plus entries on Rakuten Card's point plus page.
-// @version     1.0.0
-// @match       https://www.rakuten-card.co.jp/e-navi/members/point/shop-point/*
-// @grant       none
+// @name      Rakuten Card Point Plus
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://www.rakuten-card.co.jp/e-navi/members/point/shop-point/*
+// @grant     none
 // ==/UserScript==
 window.addEventListener('load', () => {
   const target = document.querySelector('.xlo-tab-contents');

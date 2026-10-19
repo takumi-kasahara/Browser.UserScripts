@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Point Mall
-// @description Automatically clicks the dream kuji links in Rakuten Point Mall main page.
-// @version     1.0.0
-// @match       https://pointmall.rakuten.co.jp/
-// @grant       none
+// @name      Rakuten Point Mall
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://pointmall.rakuten.co.jp/
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name        Honto Footmark
-// @description Automatically opens the footmark lottery popup on the Honto footmark page.
-// @version     1.0.0
-// @match       https://honto.jp/my/account/point/footmark.html*
-// @match       https://honto.jp/my/account/point/footmark/*
-// @grant       none
+// @name      Honto Footmark
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://honto.jp/my/account/point/footmark.html*
+// @match     https://honto.jp/my/account/point/footmark/*
+// @grant     none
 // ==/UserScript==
 import { waitForElement } from '../modules/DocumentExtensions.js';
 window.addEventListener('load', async () => {

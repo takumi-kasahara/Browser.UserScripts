@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Redirect on Pixiv
-// @description Redirects Pixiv jump links to their target URLs.
-// @version     1.0.0
-// @match       https://www.pixiv.net/jump.php?*
-// @grant       none
+// @name      Redirect on Pixiv
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://www.pixiv.net/jump.php?*
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

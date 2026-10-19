@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Point Card Janken
-// @description Automatically clicks Rakuten Point Card Janken game.
-// @version     1.0.0
-// @match       https://pointcard.rakuten.co.jp/campaign/entire/janken_challenge/*
-// @grant       none
+// @name      Rakuten Point Card Janken
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://pointcard.rakuten.co.jp/campaign/entire/janken_challenge/*
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

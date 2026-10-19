@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Point Mall Mail de Point Item
-// @description Automatically clicks the point redemption link in Rakuten Point Mall Mail de Point Item page.
-// @version     1.0.0
-// @match       https://member.pointmail.rakuten.co.jp/box/ItemDetail/?witem_id=*
-// @grant       none
+// @name      Rakuten Point Mall Mail de Point Item
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://member.pointmail.rakuten.co.jp/box/ItemDetail/?witem_id=*
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

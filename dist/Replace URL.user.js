@@ -1,15 +1,15 @@
 // ==UserScript==
-// @name        Replace URL
-// @description Replaces the current URL with the canonical URL or normalized URL if they differ.
-// @version     1.0.0
-// @exclude     https://*.translate.goog/*
-// @exclude     https://translate.google.com/*
-// @exclude     https://www.hanmoto.com/bd/search/top?*
-// @exclude     https://www.maruzenjunkudo.co.jp/search?*
-// @exclude     https://x.com/*/media
-// @match       https://*/*
-// @grant       GM.notification
-// @require     https://cdn.jsdelivr.net/npm/tldts/dist/index.umd.min.js
+// @name      Replace URL
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @exclude   https://*.translate.goog/*
+// @exclude   https://translate.google.com/*
+// @exclude   https://www.hanmoto.com/bd/search/top?*
+// @exclude   https://www.maruzenjunkudo.co.jp/search?*
+// @exclude   https://x.com/*/media
+// @match     https://*/*
+// @grant     GM.notification
+// @require   https://cdn.jsdelivr.net/npm/tldts/dist/index.umd.min.js
 // @noframes
 // ==/UserScript==
 "use strict";
