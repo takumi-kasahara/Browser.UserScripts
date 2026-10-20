@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Lucky Kuji Open
-// @description Automatically opens all lucky kuji links on Rakuten Lucky Kuji page.
-// @version     1.0.0
-// @match       https://rakucoin.appspot.com/rakuten/kuji/
-// @grant       none
+// @name      Rakuten Lucky Kuji Open
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://rakucoin.appspot.com/rakuten/kuji/
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

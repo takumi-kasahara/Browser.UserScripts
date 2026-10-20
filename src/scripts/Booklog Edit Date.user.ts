@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Booklog Edit Date
-// @description Automatically clears the date fields on the Booklog edit page.
-// @version     1.0.0
-// @match       https://booklog.jp/edit/1/*
-// @grant       none
+// @name      Booklog Edit Date
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://booklog.jp/edit/1/*
+// @grant     none
 // ==/UserScript==
 window.addEventListener('load', () => {
   setValue(document.getElementById('create_on_y'), null);

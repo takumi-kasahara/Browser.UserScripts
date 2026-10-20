@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Point Mall Mail de Point Box
-// @description Automatically opens new unread mails in Rakuten Point Mall Mail de Point Box.
-// @version     1.0.0
-// @match       https://member.pointmail.rakuten.co.jp/box
-// @grant       none
+// @name      Rakuten Point Mall Mail de Point Box
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://member.pointmail.rakuten.co.jp/box
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

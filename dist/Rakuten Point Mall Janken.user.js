@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Point Mall Janken
-// @description Automatically clicks Rakuten Point Mall Janken game.
-// @version     1.0.0
-// @match       https://pointmall.rakuten.co.jp/janken
-// @grant       none
+// @name      Rakuten Point Mall Janken
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://pointmall.rakuten.co.jp/janken
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

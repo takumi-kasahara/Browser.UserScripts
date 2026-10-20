@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Point Mall Scratch
-// @description Automatically clicks the scratch card in Rakuten Point Mall Scratch page.
-// @version     1.0.0
-// @match       https://pointmall.rakuten.co.jp/scratch
-// @grant       none
+// @name      Rakuten Point Mall Scratch
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://pointmall.rakuten.co.jp/scratch
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

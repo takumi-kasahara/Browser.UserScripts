@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten PointClub Kuji
-// @description Automatically clicks the tametoku mode kuji links in Rakuten PointClub Kuji page.
-// @version     1.0.0
-// @match       https://point.rakuten.co.jp/doc/tametokumodekuji/*
-// @grant       none
+// @name      Rakuten PointClub Kuji
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://point.rakuten.co.jp/doc/tametokumodekuji/*
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

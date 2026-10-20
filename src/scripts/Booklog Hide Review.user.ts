@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Booklog Hide Review
-// @description Automatically hides reviews from specified users on the Booklog item page.
-// @version     1.0.0
-// @match       https://booklog.jp/item/1/*
-// @grant       none
+// @name      Booklog Hide Review
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://booklog.jp/item/1/*
+// @grant     none
 // ==/UserScript==
 window.addEventListener('load', () => {
   const es = [

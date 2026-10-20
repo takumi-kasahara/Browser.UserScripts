@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        ISBN to URL for bookmeter.com
-// @description Add buttons to convert ISBN to URL on bookmeter.com
-// @version     1.0.0
-// @match       https://bookmeter.com/books/*
-// @grant       none
+// @name      ISBN to URL for bookmeter.com
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://bookmeter.com/books/*
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Card Click Point
-// @description Automatically clicks on new click point banners on Rakuten Card's click point page.
-// @version     1.0.0
-// @match       https://www.rakuten-card.co.jp/e-navi/members/point/click-point/*
-// @grant       none
+// @name      Rakuten Card Click Point
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://www.rakuten-card.co.jp/e-navi/members/point/click-point/*
+// @grant     none
 // ==/UserScript==
 window.addEventListener('load', () => {
   const target = document.getElementById('js-click-point-banner-list');

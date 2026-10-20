@@ -39,14 +39,11 @@ All user scripts must include standard Greasemonkey metadata:
 
 ```javascript
 // ==UserScript==
-// @name         Script Name
-// @namespace    https://github.com/takumi-kasahara
-// @version      1.0
-// @description  Short description
-// @author       takumi-kasahara
-// @match        https://example.com/*
-// @icon         data:image/gif;base64,...
-// @grant        none
+// @name      Script Name
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://example.com/*
+// @grant     none
 // ==/UserScript==
 ```
 

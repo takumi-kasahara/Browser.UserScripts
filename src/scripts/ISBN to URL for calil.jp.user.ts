@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name        ISBN to URL for calil.jp
-// @description Add buttons to convert ISBN to URL on calil.jp
-// @version     1.0.0
-// @match       https://calil.jp/list/*
-// @match       https://calil.jp/recipe/*
-// @grant       none
+// @name      ISBN to URL for calil.jp
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://calil.jp/list/*
+// @match     https://calil.jp/recipe/*
+// @grant     none
 // ==/UserScript==
 import { open } from '../modules/WindowExtensions.js';
 window.addEventListener('load', () => {

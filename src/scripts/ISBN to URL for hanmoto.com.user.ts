@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name        ISBN to URL for hanmoto.com
-// @description Add buttons to convert ISBN to URL on hanmoto.com
-// @version     1.0.0
-// @match       https://www.hanmoto.com/bd/isbn/*
-// @match       https://www.hanmoto.com/bd/search/*
-// @grant       none
+// @name      ISBN to URL for hanmoto.com
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://www.hanmoto.com/bd/isbn/*
+// @match     https://www.hanmoto.com/bd/search/*
+// @grant     none
 // ==/UserScript==
 import { open } from '../modules/WindowExtensions.js';
 window.addEventListener('load', () => {

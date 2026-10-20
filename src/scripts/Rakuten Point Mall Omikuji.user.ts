@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Point Mall Omikuji
-// @description Automatically clicks start button in Rakuten Point Mall Omikuji page.
-// @version     1.0.0
-// @match       https://pointmall.rakuten.co.jp/omikuji
-// @grant       none
+// @name      Rakuten Point Mall Omikuji
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://pointmall.rakuten.co.jp/omikuji
+// @grant     none
 // ==/UserScript==
 import { available } from '../modules/HtmlExtensions.js';
 window.addEventListener('load', () => {

@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Rakuten Lucky Kuji
-// @description Automatically clicks Rakuten Lucky Kuji.
-// @version     1.0.0
-// @match       https://kuji.rakuten.co.jp/*
-// @grant       none
+// @name      Rakuten Lucky Kuji
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://kuji.rakuten.co.jp/*
+// @grant     none
 // ==/UserScript==
 import { available, visible } from '../modules/HtmlExtensions.js';
 window.addEventListener('load', () => {

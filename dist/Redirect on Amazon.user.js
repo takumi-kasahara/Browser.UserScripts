@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Redirect on Amazon
-// @description Redirects Amazon search results to include a specific seller filter.
-// @version     1.0.0
-// @match       https://www.amazon.co.jp/s?*
-// @grant       none
+// @name      Redirect on Amazon
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://www.amazon.co.jp/s?*
+// @grant     none
 // ==/UserScript==
 "use strict";
 (() => {

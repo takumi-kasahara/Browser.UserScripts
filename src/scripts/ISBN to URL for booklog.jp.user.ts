@@ -1,22 +1,22 @@
 // ==UserScript==
-// @name        ISBN to URL for booklog.jp
-// @description Add buttons to convert ISBN to URL on booklog.jp
-// @version     1.0.0
-// @match       https://booklog.jp/author/*
-// @match       https://booklog.jp/item/1/*
-// @match       https://booklog.jp/search?*
-// @match       https://booklog.jp/users/*
-// @exclude     https://booklog.jp/q/*
-// @exclude     https://booklog.jp/timeline/*
-// @exclude     https://booklog.jp/users/*/archives/1/*
-// @exclude     https://booklog.jp/users/*/follower
-// @exclude     https://booklog.jp/users/*/following
-// @exclude     https://booklog.jp/users/*/goals
-// @exclude     https://booklog.jp/users/*/phrases
-// @exclude     https://booklog.jp/users/*/profile
-// @exclude     https://booklog.jp/users/*/review/*
-// @exclude     https://booklog.jp/users/*/stats
-// @grant       none
+// @name      ISBN to URL for booklog.jp
+// @namespace https://github.com/takumi-kasahara
+// @version   1.0.0
+// @match     https://booklog.jp/author/*
+// @match     https://booklog.jp/item/1/*
+// @match     https://booklog.jp/search?*
+// @match     https://booklog.jp/users/*
+// @exclude   https://booklog.jp/q/*
+// @exclude   https://booklog.jp/timeline/*
+// @exclude   https://booklog.jp/users/*/archives/1/*
+// @exclude   https://booklog.jp/users/*/follower
+// @exclude   https://booklog.jp/users/*/following
+// @exclude   https://booklog.jp/users/*/goals
+// @exclude   https://booklog.jp/users/*/phrases
+// @exclude   https://booklog.jp/users/*/profile
+// @exclude   https://booklog.jp/users/*/review/*
+// @exclude   https://booklog.jp/users/*/stats
+// @grant     none
 // ==/UserScript==
 import { open } from '../modules/WindowExtensions.js';
 window.addEventListener('load', () => {
