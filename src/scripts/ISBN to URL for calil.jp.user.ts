@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
     button.setAttribute('type', 'button');
     button.addEventListener('click', async () => {
       const urls = extract().map(isbn10 => from(isbn10));
-      await open(urls);
+      open(urls);
     });
     document
       .querySelector('.container')

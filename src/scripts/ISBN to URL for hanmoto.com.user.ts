@@ -32,7 +32,7 @@ window.addEventListener('load', () => {
       button.classList.add('btn', 'btn-sm', 'btn-default');
       button.addEventListener('click', async () => {
         const urls = extract().map(isbn10 => from(isbn10));
-        await open(urls);
+        open(urls);
       });
       element.appendChild(button);
     }
@@ -80,7 +80,7 @@ window.addEventListener('load', () => {
       button.classList.add('btn', 'btn-sm');
       button.addEventListener('click', async () => {
         const urls = extract().map(isbn10 => from(isbn10));
-        await open(urls);
+        open(urls);
       });
       element.appendChild(button);
     }

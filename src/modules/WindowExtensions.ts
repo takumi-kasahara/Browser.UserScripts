@@ -1,5 +1,3 @@
-import { copyToClipboard } from './NavigatorExtensions.js';
-
 export function select(): Selection | null {
   const selection = window.getSelection();
   if (!selection) return null;
@@ -18,7 +16,7 @@ export function select(): Selection | null {
 /**
  * @param {string[]} urls
  */
-export async function open(urls: string[]): Promise<void> {
+export function open(urls: string[]): void {
   if (!urls || urls.length === 0) return;
   const PAGE_SIZE = 20;
   const digits = String(urls.length).length;
@@ -32,13 +30,11 @@ export async function open(urls: string[]): Promise<void> {
         `Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, '0')} / ${urls.length})`,
       )
     ) {
-      await copyToClipboard(
-        `Copy ${urls.length - index} URL(s):`,
-        urls.slice(index).join('\n'),
-      );
+      GM.setClipboard(urls.slice(index).join('\n'));
+      window.alert(`Copy ${urls.length - index} URL(s):`);
       return;
     }
-    window.open(url, '_blank', 'noreferrer');
+    GM.openInTab(url);
   }
 
   /**

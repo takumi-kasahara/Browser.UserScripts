@@ -86,9 +86,8 @@ if (window.top === window.self)
       }
       else
         GM.notification({
-          text: `${location.href}\n${url.href}`,
-          title: 'Redirecting',
-          image: undefined,
+          text: url.href,
+          title: location.href,
           onclick: () => location.assign(url.href),
         });
 

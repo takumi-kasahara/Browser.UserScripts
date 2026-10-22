@@ -99,10 +99,8 @@
           history.pushState(null, "", url.href);
         } else
           GM.notification({
-            text: `${location.href}
-${url.href}`,
-            title: "Redirecting",
-            image: void 0,
+            text: url.href,
+            title: location.href,
             onclick: () => location.assign(url.href)
           });
         function hasLocalePrefix(urlLike2) {
