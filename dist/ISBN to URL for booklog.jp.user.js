@@ -16,7 +16,8 @@
 // @exclude   https://booklog.jp/users/*/profile
 // @exclude   https://booklog.jp/users/*/review/*
 // @exclude   https://booklog.jp/users/*/stats
-// @grant     none
+// @grant     GM.openInTab
+// @grant     GM.setClipboard
 // ==/UserScript==
 "use strict";
 (() => {

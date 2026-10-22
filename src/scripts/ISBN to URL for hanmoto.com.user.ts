@@ -4,7 +4,8 @@
 // @version   1.0.0
 // @match     https://www.hanmoto.com/bd/isbn/*
 // @match     https://www.hanmoto.com/bd/search/*
-// @grant     none
+// @grant     GM.openInTab
+// @grant     GM.setClipboard
 // ==/UserScript==
 import { open } from '../modules/WindowExtensions.js';
 window.addEventListener('load', () => {

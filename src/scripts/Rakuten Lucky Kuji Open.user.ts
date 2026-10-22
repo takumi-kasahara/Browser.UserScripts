@@ -3,7 +3,7 @@
 // @namespace https://github.com/takumi-kasahara
 // @version   1.0.0
 // @match     https://rakucoin.appspot.com/rakuten/kuji/
-// @grant     none
+// @grant     GM.openInTab
 // ==/UserScript==
 window.addEventListener('load', async () => {
   const urls = Array.from(

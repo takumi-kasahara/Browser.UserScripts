@@ -4,7 +4,8 @@
 // @version   1.0.0
 // @match     https://calil.jp/list/*
 // @match     https://calil.jp/recipe/*
-// @grant     none
+// @grant     GM.openInTab
+// @grant     GM.setClipboard
 // ==/UserScript==
 "use strict";
 (() => {

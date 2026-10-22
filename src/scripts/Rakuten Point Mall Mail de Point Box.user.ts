@@ -3,7 +3,7 @@
 // @namespace https://github.com/takumi-kasahara
 // @version   1.0.0
 // @match     https://member.pointmail.rakuten.co.jp/box
-// @grant     none
+// @grant     GM.openInTab
 // ==/UserScript==
 window.addEventListener('load', () => {
   const target = document.querySelector('.mailListBox');

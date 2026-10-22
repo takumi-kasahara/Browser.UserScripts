@@ -3,7 +3,8 @@
 // @namespace https://github.com/takumi-kasahara
 // @version   1.0.0
 // @match     https://bookmeter.com/books/*
-// @grant     none
+// @grant     GM.openInTab
+// @grant     GM.setClipboard
 // ==/UserScript==
 "use strict";
 (() => {
