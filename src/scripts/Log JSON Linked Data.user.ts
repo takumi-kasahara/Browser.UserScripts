@@ -52,9 +52,9 @@ if (window.top === window.self)
         const children = Array.from(addedNodes)
           .filter((e): e is HTMLScriptElement => e instanceof HTMLScriptElement)
           .filter(e => e.type === 'application/ld+json');
-        const self
-          = target instanceof HTMLScriptElement
-            && target.type === 'application/ld+json'
+        const self =
+          target instanceof HTMLScriptElement &&
+          target.type === 'application/ld+json'
             ? target
             : null;
         const scripts = self ? [self, ...children] : children;

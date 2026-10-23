@@ -44,8 +44,8 @@ if (window.top === window.self)
         const children = Array.from(addedNodes)
           .filter((e): e is HTMLLinkElement => e instanceof HTMLLinkElement)
           .filter(e => e.rel === 'canonical');
-        const self
-          = target instanceof HTMLLinkElement && target.rel === 'canonical'
+        const self =
+          target instanceof HTMLLinkElement && target.rel === 'canonical'
             ? target
             : null;
         const links = self ? [self, ...children] : children;
@@ -74,8 +74,8 @@ if (window.top === window.self)
       const url = from(urlLike);
       if (equiv(location, url)) return;
       if (
-        (hasLocalePrefix(location) && !hasLocalePrefix(url))
-        || (!hasLocalePrefix(location) && hasLocalePrefix(url))
+        (hasLocalePrefix(location) && !hasLocalePrefix(url)) ||
+        (!hasLocalePrefix(location) && hasLocalePrefix(url))
       )
         return;
 
@@ -83,8 +83,7 @@ if (window.top === window.self)
         console.info('Old URL:', location.href);
         console.info('New URL:', url.href);
         history.pushState(null, '', url.href);
-      }
-      else
+      } else
         GM.notification({
           text: url.href,
           title: location.href,

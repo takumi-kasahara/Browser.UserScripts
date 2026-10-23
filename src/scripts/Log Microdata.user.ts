@@ -53,8 +53,8 @@ if (window.top === window.self)
         ...reason: string[]
       ): void {
         if (!(target instanceof HTMLElement)) return;
-        const closest
-          = target.closest('[itemscope]') ?? document.documentElement;
+        const closest =
+          target.closest('[itemscope]') ?? document.documentElement;
         const type = closest.getAttribute('itemtype') ?? '';
         const children = Array.from(addedNodes)
           .filter((e): e is HTMLElement => e instanceof HTMLElement)

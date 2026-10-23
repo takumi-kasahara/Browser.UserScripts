@@ -13,8 +13,8 @@ window.addEventListener('load', () => {
     for (const mutation of mutations)
       for (const node of mutation.addedNodes)
         if (
-          node instanceof HTMLElement
-          && node.classList.contains('mailboxBox')
+          node instanceof HTMLElement &&
+          node.classList.contains('mailboxBox')
         ) {
           const urls = Array.from(
             node.querySelectorAll('.unread > .listCont > a'),

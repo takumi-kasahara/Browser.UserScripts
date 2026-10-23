@@ -82,8 +82,8 @@ window.addEventListener('load', () => {
     if (location.pathname.startsWith('/item/1/'))
       return [location.pathname.replace('/item/1/', '')];
     if (
-      location.pathname.startsWith('/author/')
-      || location.pathname.startsWith('/search')
+      location.pathname.startsWith('/author/') ||
+      location.pathname.startsWith('/search')
     )
       return Array.from(document.querySelectorAll('a.titleLink'))
         .filter((e): e is HTMLAnchorElement => e instanceof HTMLAnchorElement)
@@ -98,8 +98,7 @@ window.addEventListener('load', () => {
           if (!e.dataset.book) return null;
           try {
             return String(JSON.parse(e.dataset.book).id);
-          }
-          catch {
+          } catch {
             return null;
           }
         })
@@ -118,9 +117,9 @@ window.addEventListener('load', () => {
       Array.from(
         isbn10.toUpperCase(),
         (d, i) => (d === 'X' ? 10 : Number.parseInt(d, 10)) * (10 - i),
-      ).reduce((s, v) => s + v, 0)
-      % 11
-      === 0
+      ).reduce((s, v) => s + v, 0) %
+        11 ===
+      0
     );
   }
   /**
@@ -139,8 +138,7 @@ window.addEventListener('load', () => {
       const values = books.filter(Boolean).map(x => x.summary.isbn);
       if (values.length > 0) return values;
       throw new Error(`ISBN not found: ${isbn10}`);
-    }
-    catch (e) {
+    } catch (e) {
       console.warn(e);
       return [];
     }

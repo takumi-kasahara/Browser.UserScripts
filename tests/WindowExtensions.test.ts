@@ -29,8 +29,8 @@ describe('select', () => {
   });
 
   it('expands the range to the ancestor element', () => {
-    document.body.innerHTML
-      = '<div id="root"><span id="child">text</span></div>';
+    document.body.innerHTML =
+      '<div id="root"><span id="child">text</span></div>';
     const child = document.getElementById('child')!;
     const range = document.createRange();
     range.setStart(child.firstChild!, 0);

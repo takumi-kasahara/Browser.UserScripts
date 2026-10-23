@@ -23,10 +23,10 @@ export function open(urls: string[]): void {
   for (const [index, url] of urls.entries()) {
     const remaining = urls.length - index;
     if (
-      urls.length > 1
-      && remaining > 0
-      && mod(index, PAGE_SIZE) === 0
-      && !window.confirm(
+      urls.length > 1 &&
+      remaining > 0 &&
+      mod(index, PAGE_SIZE) === 0 &&
+      !window.confirm(
         `Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, '0')} / ${urls.length})`,
       )
     ) {
@@ -51,8 +51,8 @@ export function open(urls: string[]): void {
  */
 export function is(domain: string): boolean {
   return (
-    location.hostname.split('.').slice(-domain.split('.').length).join('.')
-    === domain
+    location.hostname.split('.').slice(-domain.split('.').length).join('.') ===
+    domain
   );
 }
 
@@ -74,8 +74,7 @@ export async function tryFetch(
       if (get.ok) return { exists: equiv(url, get.url), url: get.url };
     }
     return { exists: false, url: url.href };
-  }
-  catch (e) {
+  } catch (e) {
     if (!(e instanceof Error)) throw e;
     console.warn(e.message, url);
     return { exists: false, url: url.href };
@@ -99,8 +98,7 @@ export async function exists(
       if (get.ok) return equiv(url, get.url);
     }
     return false;
-  }
-  catch (e) {
+  } catch (e) {
     if (!(e instanceof Error)) throw e;
     console.warn(e.message, url.href);
     return false;
@@ -119,8 +117,8 @@ export function equiv(
   const url2 = from(urlLike2);
   if (url1.origin !== url2.origin) return false;
   if (
-    url1.pathname.replaceAll(/\/\/+/g, '/').replace(/\/$/, '')
-    !== url2.pathname.replaceAll(/\/\/+/g, '/').replace(/\/$/, '')
+    url1.pathname.replaceAll(/\/\/+/g, '/').replace(/\/$/, '') !==
+    url2.pathname.replaceAll(/\/\/+/g, '/').replace(/\/$/, '')
   )
     return false;
   if (url1.searchParams.size !== url2.searchParams.size) return false;

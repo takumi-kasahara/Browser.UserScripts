@@ -7,8 +7,7 @@ export function getHttpUrl(candidate: string, baseUrl: string): string | null {
   try {
     const url = new URL(candidate, baseUrl);
     return /^https?:$/.test(url.protocol) ? url.href : null;
-  }
-  catch {
+  } catch {
     return null;
   }
 }

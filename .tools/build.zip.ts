@@ -97,8 +97,7 @@ import { fileURLToPath } from 'node:url';
         }).trim();
         return `${repo}/raw/refs/heads/${branch}/dist/`;
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.warn(e);
     }
     return 'file:///';
