@@ -2,7 +2,7 @@
 import { build } from 'esbuild';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { getRootDir } from './utils.ts';
 
 (async () => {
   const rootDir = getRootDir();
@@ -43,10 +43,5 @@ import { fileURLToPath } from 'node:url';
     const fileName = `${path.basename(file, path.extname(file))}.js`;
     console.debug('create:', fileName);
     fs.writeFileSync(path.join(distDir, fileName), outputFile.text, 'utf-8');
-  }
-
-  function getRootDir(): string {
-    const currentDir = path.dirname(fileURLToPath(import.meta.url));
-    return path.resolve(currentDir, '..');
   }
 })();

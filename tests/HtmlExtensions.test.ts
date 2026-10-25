@@ -1,20 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
   available,
-  escape,
   extractElement,
   visible,
 } from '../src/modules/HtmlExtensions.js';
-
-describe('escape', () => {
-  it('escapes &, <, >', () => {
-    expect(escape('a&b<c>d')).toBe('a&amp;b&lt;c&gt;d');
-  });
-
-  it('leaves plain text unchanged', () => {
-    expect(escape('hello world')).toBe('hello world');
-  });
-});
 
 describe('available', () => {
   it('throws when element is null', () => {

@@ -12,7 +12,6 @@ export function select(): Selection | null {
   selection.addRange(range);
   return selection;
 }
-
 /**
  * @param {string[]} urls
  */
@@ -45,7 +44,6 @@ export function open(urls: string[]): void {
     return number - Math.floor(number / divisor) * divisor;
   }
 }
-
 /**
  * @param {string} domain
  */
@@ -55,7 +53,6 @@ export function is(domain: string): boolean {
     domain
   );
 }
-
 /**
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status}
  * @param {URL} urlLike
@@ -80,7 +77,6 @@ export async function tryFetch(
     return { exists: false, url: url.href };
   }
 }
-
 /**
  * @param {URL} urlLike
  */
@@ -104,7 +100,6 @@ export async function exists(
     return false;
   }
 }
-
 /**
  * @param {URL | string | { href: string } | { src: string }} urlLike1
  * @param {URL | string | { href: string } | { src: string }} urlLike2
@@ -127,7 +122,6 @@ export function equiv(
 
   return true;
 }
-
 /**
  * @param {URL | string | { href: string } | { src: string }} urlLike
  */
