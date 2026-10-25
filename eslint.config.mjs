@@ -1,29 +1,22 @@
 import pluginJs from '@eslint/js';
-import stylistic from '@stylistic/eslint-plugin';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 export default [
   ...tseslint.configs.recommended,
   pluginJs.configs.recommended,
-  stylistic.configs.recommended,
   {
     ignores: ['coverage', 'dist', 'node_modules'],
   },
   {
     files: ['**/*.js', '**/*.mjs'],
     rules: {
-      '@stylistic/arrow-parens': ['error', 'as-needed'],
-      '@stylistic/comma-dangle': ['error', 'always-multiline'],
-      '@stylistic/no-multi-spaces': ['error', { ignoreEOLComments: true }],
-      '@stylistic/quote-props': ['error', 'consistent'],
-      '@stylistic/semi': ['error', 'always'],
       'consistent-return': 'error',
-      'eqeqeq': 'error',
+      eqeqeq: 'error',
       'no-else-return': 'error',
       'prefer-const': 'error',
       'prefer-template': 'error',
-      'quotes': ['error', 'single'],
-      'semi': 'error',
+      quotes: ['error', 'single'],
+      semi: 'error',
     },
   },
   {
@@ -50,18 +43,8 @@ export default [
         'error',
         { prefer: 'type-imports' },
       ],
-      '@stylistic/arrow-parens': ['error', 'as-needed'],
-      '@stylistic/comma-dangle': ['error', 'always-multiline'],
-      '@stylistic/max-statements-per-line': 'off',
-      '@stylistic/member-delimiter-style': [
-        'error',
-        { multiline: { delimiter: 'semi' } },
-      ],
-      '@stylistic/no-multi-spaces': ['error', { ignoreEOLComments: true }],
-      '@stylistic/quote-props': ['error', 'consistent'],
-      '@stylistic/semi': ['error', 'always'],
       'consistent-return': 'error',
-      'eqeqeq': 'error',
+      eqeqeq: 'error',
       'no-else-return': 'error',
       'prefer-const': 'error',
       'prefer-template': 'error',

@@ -13,8 +13,8 @@ window.addEventListener('load', () => {
     for (const mutation of mutations)
       for (const node of mutation.addedNodes)
         if (
-          node instanceof HTMLElement
-          && node.matches('li:not(.is-clicked)')
+          node instanceof HTMLElement &&
+          node.matches('li:not(.is-clicked)')
         ) {
           const es = Array.from(
             node.querySelectorAll('a.click-point-banner-link'),

@@ -15,7 +15,6 @@ import { getHttpUrl } from '../modules/UrlExtensions.js';
   if (params.has('url')) {
     const url = params.get('url');
     if (url) redirect(url);
-  }
-  else if (params.size === 1)
+  } else if (params.size === 1)
     for (const [url, empty] of params) if (empty === '') redirect(url);
 })();

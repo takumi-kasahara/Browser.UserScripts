@@ -12,8 +12,7 @@ export function tryParse(text: string): Json | null {
     .trim();
   try {
     return JSON.parse(cleaned) as Json;
-  }
-  catch (e) {
+  } catch (e) {
     if (!(e instanceof Error)) throw e;
     console.warn(e.message, cleaned);
     return null;

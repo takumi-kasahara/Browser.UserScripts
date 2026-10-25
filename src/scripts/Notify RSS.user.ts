@@ -56,8 +56,8 @@ if (window.top === window.self)
         .filter(e => e.rel === 'alternate')
         .filter(
           e =>
-            e.type === 'application/atom+xml'
-            || e.type === 'application/rss+xml',
+            e.type === 'application/atom+xml' ||
+            e.type === 'application/rss+xml',
         )
         .filter(async e => await exists(e.href));
       if (links.length === 0) return;

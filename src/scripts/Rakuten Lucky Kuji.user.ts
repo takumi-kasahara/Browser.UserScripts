@@ -15,9 +15,9 @@ window.addEventListener('load', () => {
   new MutationObserver((mutations, observer) => {
     for (const mutation of mutations)
       if (
-        mutation.target instanceof HTMLElement
-        && available(mutation.target)
-        && visible(mutation.target)
+        mutation.target instanceof HTMLElement &&
+        available(mutation.target) &&
+        visible(mutation.target)
       ) {
         mutation.target.click();
         observer.disconnect();

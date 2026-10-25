@@ -43,8 +43,7 @@ window.addEventListener('load', () => {
         ?.textContent?.trim();
       return isbn10 ? [isbn10] : [];
     }
-  }
-  else if (location.pathname.startsWith('/bd/search/')) {
+  } else if (location.pathname.startsWith('/bd/search/')) {
     const element = document.createElement('div');
 
     addButton('booklog.jp', isbn10 => `https://booklog.jp/item/1/${isbn10}`);
@@ -55,8 +54,8 @@ window.addEventListener('load', () => {
       for (const mutation of mutations)
         for (const node of mutation.addedNodes)
           if (
-            node instanceof HTMLElement
-            && node.classList.contains('booksearch-sideformtitle')
+            node instanceof HTMLElement &&
+            node.classList.contains('booksearch-sideformtitle')
           ) {
             node.insertBefore(
               element,

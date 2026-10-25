@@ -7,9 +7,9 @@
 // ==/UserScript==
 import { available } from '../modules/HtmlExtensions.js';
 window.addEventListener('load', () => {
-  const target
-    = document.getElementsByClassName('omikuji_result_wrapper')[0]
-      ?? document.getElementById('main-inner');
+  const target =
+    document.getElementsByClassName('omikuji_result_wrapper')[0] ??
+    document.getElementById('main-inner');
 
   new MutationObserver((mutations, observer) => {
     for (const mutation of mutations)
