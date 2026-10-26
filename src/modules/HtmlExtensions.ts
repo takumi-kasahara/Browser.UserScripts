@@ -1,14 +1,4 @@
 /**
- * @param {string} text
- */
-export function escape(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
-
-/**
  * @param {HTMLElement} element
  */
 export function available(element: HTMLElement): boolean {
@@ -31,7 +21,6 @@ export function available(element: HTMLElement): boolean {
   if (!element.parentElement) return true;
   return available(element.parentElement);
 }
-
 /**
  * @param {HTMLElement} element
  */
@@ -45,7 +34,6 @@ export function visible(element: HTMLElement): boolean {
   if (!element.parentElement) return true;
   return visible(element.parentElement);
 }
-
 /**
  * @param {Element} element
  * @param {string} scopeAttribute

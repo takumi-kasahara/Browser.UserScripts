@@ -18,7 +18,6 @@ export function tryParse(text: string): Json | null {
     return null;
   }
 }
-
 /**
  * @param {Record<string, unknown> | Record<string, unknown>[] | null} data
  * @returns {Record<string, unknown>[]}

@@ -4,7 +4,6 @@
 export async function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 /**
  * @param {string} selector
  * @param {number} maxRetry

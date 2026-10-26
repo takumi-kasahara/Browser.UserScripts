@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 import AdmZip from 'adm-zip';
-import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { getBaseDownloadUrl, getRootDir } from './utils.ts';
 
 (() => {
   const rootDir = getRootDir();
@@ -36,10 +35,6 @@ import { fileURLToPath } from 'node:url';
   }
   writeZip(zip, zipFile);
 
-  function getRootDir(): string {
-    const currentDir = path.dirname(fileURLToPath(import.meta.url));
-    return path.resolve(currentDir, '..');
-  }
   /**
    * @param {string} outDir
    */
@@ -84,25 +79,8 @@ import { fileURLToPath } from 'node:url';
   /**
    * @param {AdmZip} zip
    * @param {string} fileName
+   * @param {string} baseDownloadUrl
    */
-  function getBaseDownloadUrl(): string {
-    try {
-      const remoteUrl = execSync('git remote get-url origin', {
-        encoding: 'utf8',
-      }).trim();
-      if (remoteUrl) {
-        const repo = remoteUrl.replace(/\.git$/, '');
-        const branch = execSync('git config --get init.defaultBranch', {
-          encoding: 'utf8',
-        }).trim();
-        return `${repo}/raw/refs/heads/${branch}/dist/`;
-      }
-    } catch (e) {
-      console.warn(e);
-    }
-    return 'file:///';
-  }
-
   function addMetadata(
     zip: AdmZip,
     fileName: string,

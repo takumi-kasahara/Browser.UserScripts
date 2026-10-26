@@ -9,6 +9,7 @@ src/
 ├── modules/  # Reusable utility functions
 └── scripts/  # User scripts (Greasemonkey-compatible)
 dist/            # Built user scripts (generated)
+pages/           # Installation and distribution pages
 ```
 
 ## 🚀 Development
@@ -34,6 +35,7 @@ This generates:
 
 - `npm run build:gm` - Builds individual user scripts for Greasemonkey
 - `npm run build:zip` - Creates a zip archive of all scripts
+- `npm run build:page` - Generates the installation page
 
 ### Output
 
@@ -41,6 +43,8 @@ This generates:
   - Built user scripts ready for Greasemonkey installation
 - `bin/Greasemonkey.zip`
   - Zip archive for bulk installation
+- `pages/UserScripts.html`
+  - Installation page with download links to each user script
 
 ## ⚙️ Compatibility
 
