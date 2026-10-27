@@ -16,6 +16,17 @@
 // ==/UserScript==
 "use strict";
 (() => {
+  // src/modules/DocumentExtensions.ts
+  function download(data, type, name) {
+    const blob = new Blob([JSON.stringify(data)], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   // src/modules/WindowExtensions.ts
   async function exists(urlLike) {
     const url = from(urlLike);
@@ -71,7 +82,7 @@
           result[name] = JSON.parse(
             String(await GM.getValue(name, JSON.stringify([])))
           );
-        GM.setClipboard(JSON.stringify(result));
+        download(result, "application/json", "RSS.json");
       });
       GM.registerMenuCommand(`Clear RSS URL(s)`, async () => {
         GM.notification({

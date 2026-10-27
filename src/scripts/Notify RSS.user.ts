@@ -14,6 +14,7 @@
 // @grant       GM.setClipboard
 // @noframes
 // ==/UserScript==
+import { download } from '../modules/DocumentExtensions.js';
 import { exists } from '../modules/WindowExtensions.js';
 if (window.top === window.self)
   window.addEventListener('load', async () => {
@@ -30,7 +31,7 @@ if (window.top === window.self)
         result[name] = JSON.parse(
           String(await GM.getValue(name, JSON.stringify([]))),
         );
-      GM.setClipboard(JSON.stringify(result));
+      download(result, 'application/json', 'RSS.json');
     });
     GM.registerMenuCommand(`Clear RSS URL(s)`, async () => {
       GM.notification({

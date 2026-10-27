@@ -1,5 +1,38 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { sleep, waitForElement } from '../src/modules/DocumentExtensions.js';
+import {
+  download,
+  sleep,
+  waitForElement,
+} from '../src/modules/DocumentExtensions.js';
+
+describe('download', () => {
+  it('creates a temporary object URL and clicks an anchor with download name', () => {
+    const createObjectURL = vi.fn().mockReturnValue('blob:mock');
+    const revokeObjectURL = vi.fn();
+    vi.stubGlobal('URL', {
+      createObjectURL,
+      revokeObjectURL,
+    });
+
+    const click = vi.fn();
+    const anchor = document.createElement('a');
+    anchor.click = click;
+    const createElement = vi
+      .spyOn(document, 'createElement')
+      .mockReturnValue(anchor);
+
+    download({ key: 'value' }, 'application/json', 'data.json');
+
+    expect(createObjectURL).toHaveBeenCalledOnce();
+    expect(anchor.href).toBe('blob:mock');
+    expect(anchor.download).toBe('data.json');
+    expect(click).toHaveBeenCalledOnce();
+    expect(revokeObjectURL).toHaveBeenCalledWith('blob:mock');
+
+    createElement.mockRestore();
+    vi.unstubAllGlobals();
+  });
+});
 
 describe('sleep', () => {
   beforeEach(() => {
