@@ -5,17 +5,18 @@
 // @description Notifies RSS feed URLs and copies them to the clipboard.
 // @author      takumi-kasahara
 // @match       https://*/*
+// @grant       GM.openInTab
+// @grant       GM.setClipboard
 // @grant       GM.listValues
 // @grant       GM.getValue
 // @grant       GM.setValue
 // @grant       GM.deleteValue
 // @grant       GM.notification
 // @grant       GM.registerMenuCommand
-// @grant       GM.setClipboard
 // @noframes
 // ==/UserScript==
 import { download } from '../modules/DocumentExtensions.js';
-import { exists } from '../modules/WindowExtensions.js';
+import { exists, open } from '../modules/WindowExtensions.js';
 if (window.top === window.self)
   window.addEventListener('load', async () => {
     const urls: string[] = JSON.parse(
@@ -84,7 +85,7 @@ if (window.top === window.self)
       GM.notification({
         text: `Found ${urls.length} RSS URL(s).`,
         title: location.hostname,
-        onclick: () => GM.setClipboard(urls.join('\n')),
+        onclick: () => open(urls),
       });
       const updated = [...new Set([...stored, ...urls])];
       await GM.setValue(location.origin, JSON.stringify(updated.sort()));
