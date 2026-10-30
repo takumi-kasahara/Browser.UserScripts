@@ -1,14 +1,31 @@
-import pluginJs from '@eslint/js';
+import js from '@eslint/js';
+import html from '@html-eslint/eslint-plugin';
+import htmlParser from '@html-eslint/parser';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
-export default [
-  ...tseslint.configs.recommended,
-  pluginJs.configs.recommended,
+import ts from 'typescript-eslint';
+
+export default defineConfig([
+  js.configs.recommended,
+  ts.configs.strict,
+  ts.configs.stylistic,
+  globalIgnores(['apm_modules', 'node_modules']),
+  globalIgnores(['coverage', 'dist']),
   {
-    ignores: ['coverage', 'dist', 'node_modules'],
+    files: ['**/*.html'],
+    languageOptions: {
+      parser: htmlParser,
+    },
+    plugins: {
+      html,
+    },
+    extends: ['html/recommended'],
+    rules: {
+      'html/indent': ['error', 2],
+    },
   },
   {
-    files: ['**/*.js', '**/*.mjs'],
+    files: ['**/*.mjs'],
     rules: {
       'consistent-return': 'error',
       eqeqeq: 'error',
@@ -22,27 +39,14 @@ export default [
   {
     files: ['**/*.ts'],
     languageOptions: {
-      parser: tseslint.parser,
+      parser: ts.parser,
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
-      globals: {
-        GM: 'readonly',
-        tldts: 'readonly',
-      },
     },
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        { argsIgnorePattern: '^_' },
-      ],
-      '@typescript-eslint/consistent-type-imports': [
-        'error',
-        { prefer: 'type-imports' },
-      ],
+      '@typescript-eslint/consistent-type-imports': ['error'],
       'consistent-return': 'error',
       eqeqeq: 'error',
       'no-else-return': 'error',
@@ -67,4 +71,4 @@ export default [
       sourceType: 'module',
     },
   },
-];
+]);
