@@ -5,7 +5,7 @@ dependencies:
     materialization_repo_url: takumi-kasahara/Dotfiles
     name: userscripts
     host: github.com
-    resolved_commit: 3383e38bcf70d0edb4d454abf105b8f18640665b
+    resolved_commit: 1eacdb4f02270cc7c66ea16e048cf5e24bafc596
     version: unknown
     virtual_path: .apm/skills/userscripts
     is_virtual: true

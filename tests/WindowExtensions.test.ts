@@ -22,7 +22,7 @@ describe('select', () => {
   });
 
   it('returns null when the selection has no ranges', () => {
-    const selection = window.getSelection()!;
+    const selection = window.getSelection() as Selection;
     selection.removeAllRanges();
     expect(selection.rangeCount).toBe(0);
     expect(select()).toBeNull();
@@ -31,47 +31,53 @@ describe('select', () => {
   it('expands the range to the ancestor element', () => {
     document.body.innerHTML =
       '<div id="root"><span id="child">text</span></div>';
-    const child = document.getElementById('child')!;
+    const child = document.getElementById('child') as HTMLElement;
     const range = document.createRange();
-    range.setStart(child.firstChild!, 0);
-    range.setEnd(child.firstChild!, 4);
-    const selection = window.getSelection()!;
+    range.setStart(child.firstChild as Node, 0);
+    range.setEnd(child.firstChild as Node, 4);
+    const selection = window.getSelection() as Selection;
     selection.removeAllRanges();
     selection.addRange(range);
 
     const result = select();
     expect(result).not.toBeNull();
-    expect(result!.getRangeAt(0).toString()).toBe('text');
-    expect(result!.getRangeAt(0).commonAncestorContainer).toBe(child);
+    expect((result as Selection).getRangeAt(0).toString()).toBe('text');
+    expect((result as Selection).getRangeAt(0).commonAncestorContainer).toBe(
+      child,
+    );
   });
 
   it('uses parentElement when the ancestor is a text node', () => {
     document.body.innerHTML = '<div id="root">plain</div>';
-    const root = document.getElementById('root')!;
+    const root = document.getElementById('root') as HTMLElement;
     const range = document.createRange();
-    range.setStart(root.firstChild!, 0);
-    range.setEnd(root.firstChild!, 5);
-    const selection = window.getSelection()!;
+    range.setStart(root.firstChild as Node, 0);
+    range.setEnd(root.firstChild as Node, 5);
+    const selection = window.getSelection() as Selection;
     selection.removeAllRanges();
     selection.addRange(range);
 
     const result = select();
     expect(result).not.toBeNull();
-    expect(result!.getRangeAt(0).commonAncestorContainer).toBe(root);
+    expect((result as Selection).getRangeAt(0).commonAncestorContainer).toBe(
+      root,
+    );
   });
 
   it('expands the selection to the parent element when the ancestor has one', () => {
     document.body.innerHTML = '<div id="root">plain</div>';
-    const root = document.getElementById('root')!;
+    const root = document.getElementById('root') as HTMLElement;
     const range = document.createRange();
     range.selectNodeContents(root);
-    const selection = window.getSelection()!;
+    const selection = window.getSelection() as Selection;
     selection.removeAllRanges();
     selection.addRange(range);
 
     const result = select();
     expect(result).not.toBeNull();
-    expect(result!.getRangeAt(0).commonAncestorContainer).toBe(document.body);
+    expect((result as Selection).getRangeAt(0).commonAncestorContainer).toBe(
+      document.body,
+    );
   });
 });
 
@@ -209,7 +215,7 @@ describe('tryFetch', () => {
       configurable: true,
       value: new URL('https://example.com/'),
     });
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
     vi.stubGlobal(
       'fetch',
       vi.fn(async () => {
@@ -306,7 +312,9 @@ describe('open', () => {
   });
 
   it('does nothing for an empty list', async () => {
-    const openSpy = vi.spyOn(GM, 'openInTab').mockImplementation(() => {});
+    const openSpy = vi
+      .spyOn(GM, 'openInTab')
+      .mockImplementation(() => undefined);
     const confirmSpy = vi
       .spyOn(window, 'confirm')
       .mockImplementation(() => true);
@@ -316,7 +324,9 @@ describe('open', () => {
   });
 
   it('opens a single url without confirmation', async () => {
-    const openSpy = vi.spyOn(GM, 'openInTab').mockImplementation(() => {});
+    const openSpy = vi
+      .spyOn(GM, 'openInTab')
+      .mockImplementation(() => undefined);
     const confirmSpy = vi
       .spyOn(window, 'confirm')
       .mockImplementation(() => true);
@@ -326,7 +336,9 @@ describe('open', () => {
   });
 
   it('confirms before opening multiple urls', async () => {
-    const openSpy = vi.spyOn(GM, 'openInTab').mockImplementation(() => {});
+    const openSpy = vi
+      .spyOn(GM, 'openInTab')
+      .mockImplementation(() => undefined);
     const confirmSpy = vi
       .spyOn(window, 'confirm')
       .mockImplementation(() => true);
@@ -336,10 +348,14 @@ describe('open', () => {
   });
 
   it('falls back to setClipboard when confirmation is cancelled', async () => {
-    const openSpy = vi.spyOn(GM, 'openInTab').mockImplementation(() => {});
+    const openSpy = vi
+      .spyOn(GM, 'openInTab')
+      .mockImplementation(() => undefined);
     vi.spyOn(window, 'confirm').mockImplementation(() => false);
-    vi.spyOn(GM, 'setClipboard').mockImplementation(() => {});
-    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+    vi.spyOn(GM, 'setClipboard').mockImplementation(() => undefined);
+    const alertSpy = vi
+      .spyOn(window, 'alert')
+      .mockImplementation(() => undefined);
     open([
       'https://example.com/a',
       'https://example.com/b',
