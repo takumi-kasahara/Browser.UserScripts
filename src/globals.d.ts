@@ -1,10 +1,7 @@
-// Ambient declarations for external UserScript globals that are not npm imports.
-/* eslint-disable no-unused-vars */
-
 // Greasemonkey API (granted via @grant in the UserScript metadata header).
 declare const GM: {
   /** @see {@link https://wiki.greasespot.net/GM.listValues} */
-  listValues(): Promise<Array<string>>;
+  listValues(): Promise<string[]>;
   /** @see {@link https://wiki.greasespot.net/GM.getValue} */
   getValue(
     name: string,
@@ -29,12 +26,12 @@ declare const GM: {
     caption: string,
     commandFunc: () => void,
     accessKey?: string,
-  );
+  ): void;
   /** @see {@link https://wiki.greasespot.net/GM.setClipboard} */
   setClipboard(text: string): void;
 };
 
-// tldts UMD global, loaded via @require in the UserScript metadata header.
+/** @see {@link https://www.jsdelivr.com/package/npm/tldts} */
 declare const tldts: {
   parse(url: string): { subdomain?: string };
 };

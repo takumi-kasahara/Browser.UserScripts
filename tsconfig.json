@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
     "allowImportingTsExtensions": true,
-    "allowJs": false,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,
-    "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext",
-    "types": ["vitest/globals", "web", "node"]
+    "target": "ESNext"
   },
   "include": [
     ".tools/**/*.ts",

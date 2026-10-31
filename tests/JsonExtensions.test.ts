@@ -17,14 +17,14 @@ describe('tryParse', () => {
   });
 
   it('returns null and warns on invalid JSON', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
     expect(tryParse('not json')).toBeNull();
     expect(warn).toHaveBeenCalled();
     warn.mockRestore();
   });
 
   it('returns null for empty string', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
     expect(tryParse('')).toBeNull();
     warn.mockRestore();
   });

@@ -9,10 +9,10 @@
 if (typeof (globalThis as { GM?: unknown }).GM === 'undefined') {
   (globalThis as { GM?: unknown }).GM = {
     getValue: async () => JSON.stringify([]),
-    setValue: async () => {},
-    deleteValue: async () => {},
-    notification: () => {},
-    openInTab: () => {},
-    setClipboard: () => {},
+    setValue: async () => undefined,
+    deleteValue: async () => undefined,
+    notification: () => undefined,
+    openInTab: () => undefined,
+    setClipboard: () => undefined,
   };
 }

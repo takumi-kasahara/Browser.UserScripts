@@ -55,7 +55,7 @@ window.addEventListener('load', () => {
    */
   function addButton(
     label: string,
-    // eslint-disable-next-line no-unused-vars
+
     from: (isbn10: string, isbn13: string) => string | null,
   ): void {
     const button = document.createElement('button');
