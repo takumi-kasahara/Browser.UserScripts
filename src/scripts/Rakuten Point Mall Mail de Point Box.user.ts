@@ -19,9 +19,7 @@ window.addEventListener('load', () => {
           const urls = Array.from(
             node.querySelectorAll('.unread > .listCont > a'),
           )
-            .filter(
-              (e): e is HTMLAnchorElement => e instanceof HTMLAnchorElement,
-            )
+            .filter(e => e instanceof HTMLAnchorElement)
             .map(a => a.href);
           if (urls.length === 0) continue;
           for (const url of urls) GM.openInTab(url);

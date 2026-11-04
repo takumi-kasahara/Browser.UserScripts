@@ -86,7 +86,7 @@ window.addEventListener('load', () => {
       location.pathname.startsWith('/search')
     )
       return Array.from(document.querySelectorAll('a.titleLink'))
-        .filter((e): e is HTMLAnchorElement => e instanceof HTMLAnchorElement)
+        .filter(e => e instanceof HTMLAnchorElement)
         .filter(a => a.origin === location.origin)
         .map(a => a.pathname.replace('/item/1/', ''))
         .reverse();

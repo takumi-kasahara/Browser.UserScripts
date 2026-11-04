@@ -33,13 +33,13 @@ window.addEventListener('load', () => {
   function extract(): string[] {
     if (location.pathname.startsWith('/list/'))
       return Array.from(document.querySelectorAll('td.title > a'))
-        .filter((e): e is HTMLAnchorElement => e instanceof HTMLAnchorElement)
+        .filter(e => e instanceof HTMLAnchorElement)
         .filter(a => a.origin === location.origin)
         .map(a => a.pathname.replace('/book/', ''))
         .reverse();
     if (location.pathname.startsWith('/recipe/'))
       return Array.from(document.querySelectorAll('div.cover > a'))
-        .filter((e): e is HTMLAnchorElement => e instanceof HTMLAnchorElement)
+        .filter(e => e instanceof HTMLAnchorElement)
         .filter(a => a.origin === location.origin)
         .map(a => a.pathname.replace('/book/', ''))
         .reverse();
