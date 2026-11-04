@@ -3,12 +3,16 @@
 // @namespace https://github.com/takumi-kasahara
 // @version   1.0.0
 // @match     https://member.pointmail.rakuten.co.jp/box/ItemDetail/?witem_id=*
-// @grant     none
+// @grant     GM.openInTab
 // ==/UserScript==
 window.addEventListener('load', () => {
-  const e =
-    document.querySelector(
-      '.point_url > a[href^="https://pmrd.rakuten.co.jp/?r="]',
-    ) ?? document.querySelector('a[href^="https://pmrd.rakuten.co.jp/?r="]');
-  if (e instanceof HTMLElement) e.click();
+  const urls = Array.from(document.querySelectorAll('.point_url > a'))
+    .filter(e => e instanceof HTMLAnchorElement)
+    .filter(
+      e =>
+        e.origin === 'https://pmrd.rakuten.co.jp' &&
+        new URL(e.href).searchParams.has('r'),
+    )
+    .map(a => a.href);
+  for (const url of urls) GM.openInTab(url);
 });
