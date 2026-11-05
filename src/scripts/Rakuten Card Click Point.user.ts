@@ -18,9 +18,7 @@ window.addEventListener('load', () => {
         ) {
           const es = Array.from(
             node.querySelectorAll('a.click-point-banner-link'),
-          ).filter(
-            (e): e is HTMLAnchorElement => e instanceof HTMLAnchorElement,
-          );
+          ).filter(e => e instanceof HTMLAnchorElement);
           if (es.length === 0) continue;
           for (const e of es) e.click();
           observer.disconnect();

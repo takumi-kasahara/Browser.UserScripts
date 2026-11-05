@@ -17,9 +17,7 @@
           if (node instanceof HTMLElement && node.matches("li:not(.is-clicked)")) {
             const es = Array.from(
               node.querySelectorAll("a.click-point-banner-link")
-            ).filter(
-              (e) => e instanceof HTMLAnchorElement
-            );
+            ).filter((e) => e instanceof HTMLAnchorElement);
             if (es.length === 0) continue;
             for (const e of es) e.click();
             observer.disconnect();

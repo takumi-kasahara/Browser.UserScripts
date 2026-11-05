@@ -17,9 +17,7 @@
           if (node instanceof HTMLElement && node.classList.contains("mailboxBox")) {
             const urls = Array.from(
               node.querySelectorAll(".unread > .listCont > a")
-            ).filter(
-              (e) => e instanceof HTMLAnchorElement
-            ).map((a) => a.href);
+            ).filter((e) => e instanceof HTMLAnchorElement).map((a) => a.href);
             if (urls.length === 0) continue;
             for (const url of urls) GM.openInTab(url);
             observer.disconnect();
