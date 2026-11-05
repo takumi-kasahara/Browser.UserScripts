@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { sleep, waitForElement } from '../src/modules/DocumentExtensions.js';
+import { sleep, waitForElement } from '../src/modules/DocumentExtensions';
 
 describe('sleep', () => {
   beforeEach(() => {

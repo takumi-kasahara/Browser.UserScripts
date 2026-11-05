@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getHttpUrl } from '../src/modules/UrlExtensions.js';
+import { getHttpUrl } from '../src/modules/UrlExtensions';
 
 describe('getHttpUrl', () => {
   const baseUrl = 'https://example.net/redirect?=';
