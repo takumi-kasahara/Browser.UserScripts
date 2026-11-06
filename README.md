@@ -1,25 +1,24 @@
 # Browser UserScripts
 
-A collection of user scripts for Greasemonkey that automate and enhance web browsing on popular Japanese e-commerce and social media sites. These scripts add useful features like bookmarks, point collection automation, URL translation, and site-specific enhancements.
+A collection of user scripts for [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) that automate and enhance web browsing.
 
 ## 🛠️ Project Structure
 
 ```plaintext
 src/
 ├── modules/  # Reusable utility functions
-└── scripts/  # User scripts (Greasemonkey-compatible)
+└── scripts/  # User scripts
 dist/            # Built user scripts (generated)
 pages/           # Installation and distribution pages
 ```
 
+## 📝 Installation
+
+1. Direct installation
+   - Copy the JavaScript content and paste into Greasemonkey
+2. Repository from [Installation page](./pages/UserScripts.html)
+
 ## 🚀 Development
-
-### Prerequisites
-
-- Node.js with npm
-- Greasemonkey browser extension installed
-
-### Installation
 
 ```bash
 npm install
@@ -30,12 +29,6 @@ npm install
 ```bash
 npm run build
 ```
-
-This generates:
-
-- `npm run build:gm` - Builds individual user scripts for Greasemonkey
-- `npm run build:zip` - Creates a zip archive of all scripts
-- `npm run build:page` - Generates the installation page
 
 ### Output
 
