@@ -4,4 +4,4 @@
   command = npm run lint && git update-index --again
 [hook "test"]
   event = pre-commit
-  command = npm run test
+  command = npm test

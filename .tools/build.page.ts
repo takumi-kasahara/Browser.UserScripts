@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { ESLint } from 'eslint';
 import { JSDOM } from 'jsdom';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -21,11 +22,21 @@ interface UserScript {
   }
   const userScripts = collectUserScripts(distRoot, baseDownloadUrl);
   const config = await resolveConfig(outputPath);
-  const code = await format(generate(userScripts), {
+  const generated = await format(generate(userScripts), {
     ...config,
     filepath: outputPath,
     parser: 'html',
   });
+  const eslint = new ESLint({ cwd: rootDir, fix: true });
+  const eslintResults = await eslint.lintText(generated, {
+    filePath: outputPath,
+  });
+  const eslintResult = eslintResults[0];
+  if (eslintResult && eslintResult.errorCount > 0) {
+    console.error(eslintResult.messages);
+    throw new Error('ESLint failed for generated page');
+  }
+  const code = eslintResult?.output ?? generated;
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, code, 'utf-8');
   console.debug('created:', outputPath);

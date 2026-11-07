@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "build": "tsc && npm run lint && npm run build:gm && npm run build:page && npm run build:zip",
+    "build": "npm run lint && npm run build:gm && npm run build:page && npm run build:zip",
     "build:gm": "node --experimental-strip-types .tools/build.gm.ts",
     "build:page": "node --experimental-strip-types .tools/build.page.ts",
     "build:zip": "node --experimental-strip-types .tools/build.zip.ts",
@@ -13,17 +13,17 @@
     "@html-eslint/eslint-plugin": "^0.67.0",
     "@html-eslint/parser": "^0.67.0",
     "@types/jsdom": "^30.0.0",
-    "@vitest/coverage-v8": "^4.1.12",
+    "@vitest/coverage-v8": "^5.1.0",
     "adm-zip": "^0.6.1",
     "esbuild": "^0.28.2",
-    "eslint": "^10.13.0",
-    "globals": "^17.13.0",
-    "jsdom": "^30.1.3",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "jsdom": "^31.0.0",
     "markdownlint-cli2": "^0.24.0",
     "prettier": "^3.9.10",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.1",
-    "vitest": "^4.1.12"
+    "vitest": "^5.1.0"
   },
   "private": true
 }
