@@ -142,11 +142,9 @@
         const oldTitle = document.title.normalize("NFKC");
         const newTitle = title.normalize("NFKC");
         if (newTitle === oldTitle) return;
-        if (oldTitle.includes(newTitle)) {
-          console.info("Old Title:", oldTitle);
-          console.info("New Title:", newTitle);
-          document.title = title;
-        }
+        console.info("Old Title:", oldTitle);
+        console.info("New Title:", newTitle);
+        document.title = title;
       }
     });
 })();
