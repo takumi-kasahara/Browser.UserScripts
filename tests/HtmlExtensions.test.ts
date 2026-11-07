@@ -3,7 +3,7 @@ import {
   available,
   extractElement,
   visible,
-} from '../src/modules/HtmlExtensions.js';
+} from '../src/modules/HtmlExtensions';
 
 describe('available', () => {
   it('throws when element is null', () => {
