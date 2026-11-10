@@ -5,18 +5,38 @@
 // @description Notifies RSS feed URLs and copies them to the clipboard.
 // @author      takumi-kasahara
 // @match       https://*/*
+// @grant       GM.openInTab
+// @grant       GM.setClipboard
 // @grant       GM.listValues
 // @grant       GM.getValue
 // @grant       GM.setValue
 // @grant       GM.deleteValue
 // @grant       GM.notification
 // @grant       GM.registerMenuCommand
-// @grant       GM.setClipboard
 // @noframes
 // ==/UserScript==
 "use strict";
 (() => {
   // src/modules/WindowExtensions.ts
+  function open(urls) {
+    if (!urls || urls.length === 0) return;
+    const PAGE_SIZE = 20;
+    const digits = String(urls.length).length;
+    for (const [index, url] of urls.entries()) {
+      const remaining = urls.length - index;
+      if (urls.length > 1 && remaining > 0 && mod(index, PAGE_SIZE) === 0 && !window.confirm(
+        `Open ${Math.min(remaining, PAGE_SIZE)} URL(s)? (${String(index).padStart(digits, "0")} / ${urls.length})`
+      )) {
+        GM.setClipboard(urls.slice(index).join("\n"));
+        window.alert(`Copy ${urls.length - index} URL(s):`);
+        return;
+      }
+      GM.openInTab(url);
+    }
+    function mod(number, divisor) {
+      return number - Math.floor(number / divisor) * divisor;
+    }
+  }
   async function exists(urlLike) {
     const url = from(urlLike);
     if (!/^https?:$/.test(url.protocol)) return false;
@@ -97,6 +117,11 @@
             case "https://github.com":
               url.searchParams.delete("token");
               break;
+            case "https://www.bing.com":
+              url.searchParams.delete("q");
+              url.searchParams.delete("filters");
+              url.searchParams.delete("rnoreward");
+              break;
           }
           return url.href;
         }).filter((href) => !stored.includes(href));
@@ -104,7 +129,7 @@
         GM.notification({
           text: `Found ${urls2.length} RSS URL(s).`,
           title: location.hostname,
-          onclick: () => GM.setClipboard(urls2.join("\n"))
+          onclick: () => open(urls2)
         });
         const updated = [.../* @__PURE__ */ new Set([...stored, ...urls2])];
         await GM.setValue(location.origin, JSON.stringify(updated.sort()));
