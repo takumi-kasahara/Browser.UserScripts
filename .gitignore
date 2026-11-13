@@ -8,5 +8,7 @@
 
 .agents/
 apm_modules/
-coverage/
 node_modules/
+
+bin/
+coverage/
