@@ -1,11 +1,11 @@
 lockfile_version: '1'
-apm_version: 0.35.0
+apm_version: 0.35.1
 dependencies:
   - repo_url: takumi-kasahara/dotfiles
     materialization_repo_url: takumi-kasahara/Dotfiles
     name: userscripts
     host: github.com
-    resolved_commit: 1eacdb4f02270cc7c66ea16e048cf5e24bafc596
+    resolved_commit: 965dbcce575f1518341e280a647dffa3f522d2d4
     version: unknown
     virtual_path: .apm/skills/userscripts
     is_virtual: true
