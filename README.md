@@ -16,7 +16,7 @@ pages/           # Installation and distribution pages
 
 1. Direct installation
    - Copy the JavaScript content and paste into Greasemonkey
-2. Repository from [Installation page](./pages/UserScripts.html)
+2. Repository from [Installation page](./index.html)
 
 ## 🚀 Development
 
