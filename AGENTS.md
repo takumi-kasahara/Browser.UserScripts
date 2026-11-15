@@ -20,8 +20,8 @@ A collection of user scripts for [Greasemonkey](https://addons.mozilla.org/en-US
 
 ### Key Tooling
 
-- esbuild: Fast JavaScript bundler
 - adm-zip: Zip archive creation
+- esbuild: Fast JavaScript bundler
 - ESLint: Code linting (configured via `eslint.config.mjs`)
 
 ## Coding Conventions
