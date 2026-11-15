@@ -10,8 +10,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@html-eslint/eslint-plugin": "^0.67.0",
-    "@html-eslint/parser": "^0.67.0",
+    "@html-eslint/eslint-plugin": "^0.68.0",
+    "@html-eslint/parser": "^0.68.0",
     "@types/jsdom": "^30.0.0",
     "@vitest/coverage-v8": "^5.1.0",
     "adm-zip": "^0.6.1",
@@ -19,10 +19,10 @@
     "eslint": "^10.14.0",
     "globals": "^17.14.0",
     "jsdom": "^31.0.0",
-    "markdownlint-cli2": "^0.24.0",
-    "prettier": "^3.9.10",
+    "markdownlint-cli2": "^0.24.1",
+    "prettier": "^3.10.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.72.1",
+    "typescript-eslint": "^8.72.2",
     "vitest": "^5.1.0"
   },
   "private": true

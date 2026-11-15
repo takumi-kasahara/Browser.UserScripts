@@ -30,8 +30,7 @@ declare const GM: {
   /** @see {@link https://wiki.greasespot.net/GM.setClipboard} */
   setClipboard(text: string): void;
 };
-
-/** @see {@link https://www.jsdelivr.com/package/npm/tldts} */
+/** @see {@link https://www.npmjs.com/package/tldts} */
 declare const tldts: {
   parse(url: string): { subdomain?: string };
 };

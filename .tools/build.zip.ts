@@ -102,8 +102,6 @@ import { getBaseDownloadUrl, getRootDir } from './utils.ts';
    * @param {string} zipPath
    */
   function writeZip(zip: AdmZip, zipPath: string): void {
-    for (const entry of zip.getEntries()) entry.header.time = null;
-
     zip.writeZip(zipPath);
     console.debug('done:', zipPath);
   }
