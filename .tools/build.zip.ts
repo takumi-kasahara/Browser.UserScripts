@@ -1,31 +1,35 @@
 #!/usr/bin/env node
 import AdmZip from 'adm-zip';
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import { getBaseDownloadUrl, getRootDir } from './utils.ts';
 
-(() => {
+(async () => {
   const rootDir = getRootDir();
   const outDir = path.join(rootDir, 'dist');
   const binDir = path.join(rootDir, 'bin');
   const zipFile = path.join(binDir, 'Greasemonkey.zip');
   const metadataTemplate = JSON.parse(
-    fs.readFileSync(path.join(rootDir, '.template', '.gm.json'), 'utf8'),
+    await fs.readFile(path.join(rootDir, '.template', '.gm.json'), 'utf8'),
   );
 
-  if (!fs.existsSync(outDir)) {
+  let fileNames: string[];
+  try {
+    fileNames = await collectUserScripts(outDir);
+  } catch (e) {
+    const err = e as NodeJS.ErrnoException;
+    if (!(err.code === 'ENOENT')) throw e;
     console.error(`${outDir} not found.`);
     return;
   }
-  if (!fs.existsSync(binDir)) fs.mkdirSync(binDir, { recursive: true });
+  await fs.mkdir(binDir, { recursive: true });
 
-  const fileNames = collectUserScripts(outDir);
   if (fileNames.length === 0) {
     console.error(`${outDir}/*.user.js not found.`);
     return;
   }
 
-  const zip = loadZip(zipFile);
+  const zip = await loadZip(zipFile);
   const baseDownloadUrl = getBaseDownloadUrl();
   for (const fileName of fileNames) {
     const entryName = computeEntryName(fileName);
@@ -37,12 +41,12 @@ import { getBaseDownloadUrl, getRootDir } from './utils.ts';
 
   /**
    * @param {string} outDir
+   * @returns {Promise<string[]>}
    */
-  function collectUserScripts(outDir: string): string[] {
-    return fs
-      .readdirSync(outDir, { withFileTypes: true })
-      .filter((d: fs.Dirent) => d.isFile() && d.name.endsWith('.user.js'))
-      .map((d: fs.Dirent) => d.name);
+  async function collectUserScripts(outDir: string): Promise<string[]> {
+    return (await fs.readdir(outDir, { withFileTypes: true }))
+      .filter(d => d.isFile() && d.name.endsWith('.user.js'))
+      .map(d => d.name);
   }
   /**
    * @param {string} fileName
@@ -53,10 +57,16 @@ import { getBaseDownloadUrl, getRootDir } from './utils.ts';
   }
   /**
    * @param {string} zipPath
-   * @returns {AdmZip}
+   * @returns {Promise<AdmZip>}
    */
-  function loadZip(zipPath: string): AdmZip {
-    return fs.existsSync(zipPath) ? new AdmZip(zipPath) : new AdmZip();
+  async function loadZip(zipPath: string): Promise<AdmZip> {
+    try {
+      return new AdmZip(await fs.readFile(zipPath));
+    } catch (e) {
+      const err = e as NodeJS.ErrnoException;
+      if (!(err.code === 'ENOENT')) throw e;
+      return new AdmZip();
+    }
   }
   /**
    * @param {AdmZip} zip

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { ESLint } from 'eslint';
 import { JSDOM } from 'jsdom';
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import { format, resolveConfig } from 'prettier';
 import { getBaseDownloadUrl, getRootDir } from './utils.ts';
@@ -16,11 +16,15 @@ interface UserScript {
   const distRoot = path.join(rootDir, 'dist');
   const outputPath = path.join(rootDir, 'pages', 'UserScripts.html');
   const baseDownloadUrl = getBaseDownloadUrl();
-  if (!fs.existsSync(distRoot)) {
+  let userScripts: UserScript[];
+  try {
+    userScripts = await collectUserScripts(distRoot, baseDownloadUrl);
+  } catch (e) {
+    const err = e as NodeJS.ErrnoException;
+    if (!(err.code === 'ENOENT')) throw e;
     console.error(`${distRoot} not found.`);
     return;
   }
-  const userScripts = collectUserScripts(distRoot, baseDownloadUrl);
   const config = await resolveConfig(outputPath);
   const generated = await format(generate(userScripts), {
     ...config,
@@ -37,24 +41,24 @@ interface UserScript {
     throw new Error('ESLint failed for generated page');
   }
   const code = eslintResult?.output ?? generated;
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  fs.writeFileSync(outputPath, code, 'utf-8');
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+  await fs.writeFile(outputPath, code, 'utf-8');
   console.debug('created:', outputPath);
 
   /**
    * @param {string} dir
    * @param {string} baseDownloadUrl
-   * @returns {UserScript[]}
+   * @returns {Promise<UserScript[]>}
    */
-  function collectUserScripts(
+  async function collectUserScripts(
     dir: string,
     baseDownloadUrl: string,
-  ): UserScript[] {
+  ): Promise<UserScript[]> {
     const userScripts: UserScript[] = [];
-    const files = fs.readdirSync(dir, { withFileTypes: true });
+    const files = await fs.readdir(dir, { withFileTypes: true });
     for (const file of files) {
       if (!file.isFile() || !file.name.endsWith('.user.js')) continue;
-      const code = fs.readFileSync(path.join(dir, file.name), 'utf-8');
+      const code = await fs.readFile(path.join(dir, file.name), 'utf-8');
       userScripts.push({
         name:
           extractMetadata(code, '@name') ??
