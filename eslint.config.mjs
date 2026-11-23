@@ -5,8 +5,9 @@ import globals from 'globals';
 import ts from 'typescript-eslint';
 
 export default defineConfig([
-  globalIgnores(['apm_modules', 'node_modules']),
-  globalIgnores(['coverage', 'dist']),
+  globalIgnores(['.agents', 'apm_modules']),
+  globalIgnores(['node_modules']),
+  globalIgnores(['coverage']),
   {
     files: ['**/*.mjs'],
     plugins: {
