@@ -1,11 +1,13 @@
-lockfile_version: '1'
-apm_version: 0.36.1
+lockfile_version: '4'
+apm_version: 0.39.1
+manifest_targets:
+  - copilot
 dependencies:
   - repo_url: takumi-kasahara/dotfiles
     materialization_repo_url: takumi-kasahara/Dotfiles
     name: userscripts
     host: github.com
-    resolved_commit: efcbb8e0522a059c43018f851369cc67c51df689
+    resolved_commit: 29b40a451081461e506584a6391ca91c1d4c605c
     version: unknown
     virtual_path: .apm/skills/userscripts
     is_virtual: true
@@ -17,7 +19,7 @@ dependencies:
     deployed_file_hashes:
       .agents/skills/userscripts/LICENSE: sha256:3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986
       .agents/skills/userscripts/SKILL.md: sha256:c6b0f4b7b28b2e44ca4fdf581b8ac5b5dfee00bab101961b5e6f188f9fe6b98a
-    content_hash: sha256:af085eed686a42a2b754410961fa6336f17aa2f05b28ecbe057a08fa8f5e8cde
+    content_hash: sha256:f9312eabbf8faed75cc036486ba320e64b5e3b41a1aeb4aaddddd08180f05d42
     carried_licenses:
       - path: LICENSE
         source: LICENSE
